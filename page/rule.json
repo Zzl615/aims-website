@@ -6,7 +6,7 @@
         "syncLocation": false,
         "api": {
           "method": "get",
-          "url": "http://211.154.163.74:21509/aio-program/task_rule/list?page=1&page_size=10"
+          "url": "/api/aio-program/task_rule/list"
         },
         "columns": [
           {
@@ -956,60 +956,605 @@
             "level": "primary",
             "dialog": {
               "title": "新增",
-              "body": {
-                "type": "form",
-                "api": {
-                  "method": "post",
-                  "url": "http://211.154.163.74:21509/aio-program/task_rule/list?page=1&page_size=10"
-                },
-                "body": [
-                  {
-                    "type": "input-text",
-                    "name": "status",
-                    "label": "状态",
-                    "id": "u:fa91ad8baecb"
+              "body": [
+                {
+                  "type": "form",
+                  "api": {
+                    "method": "post",
+                    "url": "/api/aio-program/task_rule"
                   },
-                  {
-                    "type": "input-text",
-                    "name": "name",
-                    "label": "名称",
-                    "id": "u:2173fcd7b0d6"
-                  },
-                  {
-                    "type": "input-text",
-                    "name": "patient_ids",
-                    "label": "用户",
-                    "id": "u:dc67fa186727"
-                  },
-                  {
-                    "type": "input-text",
-                    "name": "user_id",
-                    "label": "执行者",
-                    "id": "u:435c163512d4"
-                  },
-                  {
-                    "type": "input-text",
-                    "name": "start_time",
-                    "label": "开始时间",
-                    "id": "u:3f9aa1e01c9b"
-                  },
-                  {
-                    "type": "input-text",
-                    "name": "repeating_rules",
-                    "label": "重复规则",
-                    "id": "u:450cfc860970"
-                  },
-                  {
-                    "type": "input-text",
-                    "name": "content",
-                    "label": "任务内容",
-                    "id": "u:5816589ae5ba"
-                  }
-                ],
-                "id": "u:46454a5f3e1b"
-              }
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "name": "name",
+                      "label": "任务名称",
+                      "mode": "normal",
+                      "id": "u:3a559143d4d0",
+                      "required": true
+                    },
+                    {
+                      "type": "nested-select",
+                      "name": "patient_ids",
+                      "label": "目标客户",
+                      "mode": "normal",
+                      "id": "u:cf62f9bffada",
+                      "onlyChildren": true,
+                      "searchable": true,
+                      "onlyLeaf": true,
+                      "multiple": true,
+                      "size": "lg",
+                      "source": {
+                        "url": "/api/admin/patientcenter/patient/list",
+                        "method": "post",
+                        "messages": {
+                        },
+                        "adaptor": "console.log(payload)\nreturn payload",
+                        "dataType": "json",
+                        "data": {
+                          "patientDtoFilter": {
+                            "patientName": "",
+                            "nationalId": "",
+                            "phone": "",
+                            "patientId": "",
+                            "dataPermissionsUser": ""
+                          },
+                          "pageParam": {
+                            "pageNum": "1",
+                            "pageSize": "1000"
+                          }
+                        }
+                      },
+                      "labelField": "patientName",
+                      "valueField": "patientId",
+                      "clearable": true,
+                      "placeholder": "请选择目标患者",
+                      "hideNodePathLabel": true,
+                      "joinValues": false,
+                      "required": true,
+                      "extractValue": true
+                    },
+                    {
+                      "type": "select",
+                      "label": "触发条件",
+                      "name": "trigger_type",
+                      "options": [
+                        {
+                          "label": "定时型",
+                          "value": 1
+                        }
+                      ],
+                      "id": "u:0b717e64c033",
+                      "mode": "normal",
+                      "multiple": false,
+                      "required": true,
+                      "value": 1
+                    },
+                    {
+                      "type": "input-datetime",
+                      "name": "start_time",
+                      "label": "开始时间",
+                      "id": "u:98ee782be7d1",
+                      "inputFormat": "YYYY-MM-DD HH:mm:ss",
+                      "placeholder": "请选择日期以及时间",
+                      "format": "YYYY-MM-DD HH:mm:ss",
+                      "minDate": "",
+                      "maxDate": "",
+                      "value": "",
+                      "mode": "normal"
+                    },
+                    {
+                      "type": "select",
+                      "name": "repeating_rules",
+                      "label": "重复规则",
+                      "id": "u:ba434a14b747",
+                      "options": [
+                        {
+                          "label": "每天",
+                          "value": "1"
+                        },
+                        {
+                          "label": "每周",
+                          "value": "2"
+                        },
+                        {
+                          "label": "间隔",
+                          "value": "3"
+                        }
+                      ],
+                      "mode": "normal",
+                      "multiple": false,
+                      "value": "1"
+                    },
+                    {
+                      "type": "button-group-select",
+                      "name": "weekly_repeat_days",
+                      "label": "任务生效后",
+                      "id": "u:811b3b103424",
+                      "mode": "normal",
+                      "inline": false,
+                      "options": [
+                        {
+                          "label": "第1天",
+                          "value": 1
+                        },
+                        {
+                          "label": "第2天",
+                          "value": 2
+                        },
+                        {
+                          "label": "第3天",
+                          "value": 3
+                        },
+                        {
+                          "label": "第4天",
+                          "value": 4
+                        },
+                        {
+                          "label": "第5天",
+                          "value": 5
+                        },
+                        {
+                          "label": "第6天",
+                          "value": 6
+                        },
+                        {
+                          "label": "第7天",
+                          "value": 7
+                        }
+                      ],
+                      "multiple": true,
+                      "joinValues": false,
+                      "extractValue": true,
+                      "hiddenOn": "data.repeating_rules != 2",
+                      "clearValueOnHidden": true,
+                      "static": false
+                    },
+                    {
+                      "type": "fieldSet",
+                      "id": "u:8deb319a96fa",
+                      "title": "选择任务发送间隔",
+                      "collapsable": false,
+                      "body": [
+                        {
+                          "type": "group",
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "label": "任务生效后",
+                              "name": "interval_repeat_value",
+                              "id": "u:a3b16263a708"
+                            },
+                            {
+                              "type": "select",
+                              "label": "",
+                              "name": "interval_repeat_unit",
+                              "options": [
+                                {
+                                  "label": "天",
+                                  "value": 4
+                                },
+                                {
+                                  "label": "周",
+                                  "value": 5
+                                },
+                                {
+                                  "label": "月",
+                                  "value": 6
+                                },
+                                {
+                                  "label": "年",
+                                  "value": 7
+                                }
+                              ],
+                              "id": "u:21d8793931a6",
+                              "mode": "normal"
+                            }
+                          ],
+                          "id": "u:d36a2e0a8939"
+                        }
+                      ],
+                      "subFormMode": "",
+                      "className": "Collapse--base",
+                      "hiddenOn": "data.repeating_rules != 3"
+                    },
+                    {
+                      "type": "input-group",
+                      "label": "重复持续时长",
+                      "mode": "normal",
+                      "id": "u:54c735b0afd6",
+                      "body": [
+                        {
+                          "type": "select",
+                          "label": "文本",
+                          "name": "duration_value",
+                          "id": "u:7443d80b0039",
+                          "options": [
+                            {
+                              "label": "1",
+                              "value": 1
+                            },
+                            {
+                              "label": "2",
+                              "value": 2
+                            },
+                            {
+                              "label": "3",
+                              "value": 3
+                            },
+                            {
+                              "label": "4",
+                              "value": 4
+                            },
+                            {
+                              "label": "5",
+                              "value": 5
+                            },
+                            {
+                              "label": "6",
+                              "value": 6
+                            },
+                            {
+                              "label": "7",
+                              "value": 7
+                            },
+                            {
+                              "label": "8",
+                              "value": 8
+                            },
+                            {
+                              "label": "9",
+                              "value": 9
+                            },
+                            {
+                              "label": "10",
+                              "value": 10
+                            },
+                            {
+                              "label": "11",
+                              "value": 11
+                            },
+                            {
+                              "label": "12",
+                              "value": 12
+                            },
+                            {
+                              "label": "13",
+                              "value": 13
+                            },
+                            {
+                              "label": "14",
+                              "value": 14
+                            },
+                            {
+                              "label": "15",
+                              "value": 15
+                            },
+                            {
+                              "label": "16",
+                              "value": 16
+                            },
+                            {
+                              "label": "17",
+                              "value": 17
+                            },
+                            {
+                              "label": "18",
+                              "value": 18
+                            },
+                            {
+                              "label": "19",
+                              "value": 19
+                            },
+                            {
+                              "label": "20",
+                              "value": 20
+                            },
+                            {
+                              "label": "21",
+                              "value": 21
+                            },
+                            {
+                              "label": "22",
+                              "value": 22
+                            },
+                            {
+                              "label": "23",
+                              "value": 23
+                            },
+                            {
+                              "label": "24",
+                              "value": 24
+                            },
+                            {
+                              "label": "25",
+                              "value": 25
+                            },
+                            {
+                              "label": "26",
+                              "value": 26
+                            },
+                            {
+                              "label": "27",
+                              "value": 27
+                            },
+                            {
+                              "label": "28",
+                              "value": 28
+                            },
+                            {
+                              "label": "29",
+                              "value": 29
+                            },
+                            {
+                              "label": "30",
+                              "value": 30
+                            }
+                          ],
+                          "multiple": false,
+                          "value": 1,
+                          "required": true
+                        },
+                        {
+                          "type": "select",
+                          "name": "duration_unit",
+                          "options": [
+                            {
+                              "label": "天",
+                              "value": 4
+                            },
+                            {
+                              "label": "周",
+                              "value": 5
+                            },
+                            {
+                              "label": "月",
+                              "value": 6
+                            },
+                            {
+                              "label": "年",
+                              "value": 7
+                            }
+                          ],
+                          "value": 5,
+                          "id": "u:6cd3bc0ea86c",
+                          "multiple": false,
+                          "required": true
+                        }
+                      ],
+                      "required": true
+                    },
+                    {
+                      "type": "textarea",
+                      "label": "任务内容",
+                      "mode": "normal",
+                      "id": "u:8dfadf06e6ae",
+                      "name": "content",
+                      "required": true,
+                      "minRows": 3,
+                      "maxRows": 20
+                    },
+                    {
+                      "type": "input-group",
+                      "label": "任务完成时间",
+                      "mode": "normal",
+                      "id": "u:54c735b0afd6",
+                      "body": [
+                        {
+                          "type": "select",
+                          "label": "文本",
+                          "name": "task_due_time_value",
+                          "id": "u:7443d80b0039",
+                          "options": [
+                            {
+                              "label": "1",
+                              "value": 1
+                            },
+                            {
+                              "label": "2",
+                              "value": 2
+                            },
+                            {
+                              "label": "3",
+                              "value": 3
+                            },
+                            {
+                              "label": "4",
+                              "value": 4
+                            },
+                            {
+                              "label": "5",
+                              "value": 5
+                            },
+                            {
+                              "label": "6",
+                              "value": 6
+                            },
+                            {
+                              "label": "7",
+                              "value": 7
+                            },
+                            {
+                              "label": "8",
+                              "value": 8
+                            },
+                            {
+                              "label": "9",
+                              "value": 9
+                            },
+                            {
+                              "label": "10",
+                              "value": 10
+                            },
+                            {
+                              "label": "11",
+                              "value": 11
+                            },
+                            {
+                              "label": "12",
+                              "value": 12
+                            },
+                            {
+                              "label": "13",
+                              "value": 13
+                            },
+                            {
+                              "label": "14",
+                              "value": 14
+                            },
+                            {
+                              "label": "15",
+                              "value": 15
+                            },
+                            {
+                              "label": "16",
+                              "value": 16
+                            },
+                            {
+                              "label": "17",
+                              "value": 17
+                            },
+                            {
+                              "label": "18",
+                              "value": 18
+                            },
+                            {
+                              "label": "19",
+                              "value": 19
+                            },
+                            {
+                              "label": "20",
+                              "value": 20
+                            },
+                            {
+                              "label": "21",
+                              "value": 21
+                            },
+                            {
+                              "label": "22",
+                              "value": 22
+                            },
+                            {
+                              "label": "23",
+                              "value": 23
+                            },
+                            {
+                              "label": "24",
+                              "value": 24
+                            },
+                            {
+                              "label": "25",
+                              "value": 25
+                            },
+                            {
+                              "label": "26",
+                              "value": 26
+                            },
+                            {
+                              "label": "27",
+                              "value": 27
+                            },
+                            {
+                              "label": "28",
+                              "value": 28
+                            },
+                            {
+                              "label": "29",
+                              "value": 29
+                            },
+                            {
+                              "label": "30",
+                              "value": 30
+                            }
+                          ],
+                          "multiple": false,
+                          "value": 1,
+                          "required": true
+                        },
+                        {
+                          "type": "select",
+                          "name": "task_due_time_unit",
+                          "options": [
+                            {
+                              "label": "时",
+                              "value": 3
+                            },
+                            {
+                              "label": "天",
+                              "value": 4
+                            },
+                            {
+                              "label": "周",
+                              "value": 5
+                            },
+                            {
+                              "label": "月",
+                              "value": 6
+                            },
+                            {
+                              "label": "年",
+                              "value": 7
+                            }
+                          ],
+                          "value": 3,
+                          "id": "u:6cd3bc0ea86c",
+                          "multiple": false,
+                          "required": true
+                        }
+                      ],
+                      "required": true
+                    },
+                    {
+                      "type": "select",
+                      "name": "completion_conditions",
+                      "label": "任务完成条件",
+                      "mode": "normal",
+                      "id": "u:e19162f2407f",
+                      "options": [
+                        {
+                          "label": "人工点击完成按钮",
+                          "value": 1
+                        }
+                      ],
+                      "required": true,
+                      "multiple": false,
+                      "value": 1
+                    },
+                    {
+                      "type": "nested-select",
+                      "name": "user_ids",
+                      "label": "执行者",
+                      "mode": "normal",
+                      "id": "u:cf62f9bffada",
+                      "multiple": true,
+                      "required": true,
+                      "onlyChildren": true,
+                      "searchable": true,
+                      "onlyLeaf": true,
+                      "size": "lg",
+                      "source": {
+                        "url": "/api/admin/upms/sysUser/getFollowerList",
+                        "method": "get",
+                        "messages": {
+                        },
+                        "adaptor": "",
+                        "dataType": "json"
+                      },
+                      "labelField": "label",
+                      "valueField": "value",
+                      "clearable": true,
+                      "placeholder": "请选择执行者",
+                      "hideNodePathLabel": true,
+                      "joinValues": false,
+                      "extractValue": true
+                    }
+                  ],
+                  "id": "u:174002ed55b6"
+                }
+              ],
+              "type": "dialog",
+              "id": "u:0dfa71db8ab5"
             },
-            "id": "u:30fab27e1406"
+            "id": "u:c59d84dde548"
           },
           "bulkActions"
         ],
@@ -1095,19 +1640,7 @@
                 },
                 {
                   "label": "暂停中",
-                  "value": 2
-                },
-                {
-                  "label": "已过期",
-                  "value": 3
-                },
-                {
-                  "label": "未开始",
-                  "value": 4
-                },
-                {
-                  "label": "已完成",
-                  "value": 5
+                  "value": 0
                 }
               ],
               "defaultCheckAll": false,
@@ -1212,7 +1745,11 @@
           ],
           "wrapWithPanel": true
         },
-        "id": "u:22fd4b9b0750"
+        "id": "u:22fd4b9b0750",
+        "alwaysShowPagination": true,
+        "perPageField": "page_size",
+        "pageField": "page",
+        "perPage": 20
       }
     ],
     "id": "u:920bc5473026",
@@ -1222,5 +1759,6 @@
     "asideResizor": false,
     "style": {
       "boxShadow": " 0px 0px 0px 0px transparent"
-    }
+    },
+    "title": "任务规则管理"
   }
