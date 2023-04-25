@@ -274,14 +274,176 @@
                     "placeholder": "请选择"
                   },
                   {
+                    "type": "input-group",
+                    "label": "重复持续时长",
+                    "mode": "normal",
+                    "id": "u:54c735b0afd6",
+                    "body": [
+                      {
+                        "type": "select",
+                        "label": "文本",
+                        "name": "duration_value",
+                        "id": "u:7443d80b0039",
+                        "options": [
+                          {
+                            "label": "1",
+                            "value": 1
+                          },
+                          {
+                            "label": "2",
+                            "value": 2
+                          },
+                          {
+                            "label": "3",
+                            "value": 3
+                          },
+                          {
+                            "label": "4",
+                            "value": 4
+                          },
+                          {
+                            "label": "5",
+                            "value": 5
+                          },
+                          {
+                            "label": "6",
+                            "value": 6
+                          },
+                          {
+                            "label": "7",
+                            "value": 7
+                          },
+                          {
+                            "label": "8",
+                            "value": 8
+                          },
+                          {
+                            "label": "9",
+                            "value": 9
+                          },
+                          {
+                            "label": "10",
+                            "value": 10
+                          },
+                          {
+                            "label": "11",
+                            "value": 11
+                          },
+                          {
+                            "label": "12",
+                            "value": 12
+                          },
+                          {
+                            "label": "13",
+                            "value": 13
+                          },
+                          {
+                            "label": "14",
+                            "value": 14
+                          },
+                          {
+                            "label": "15",
+                            "value": 15
+                          },
+                          {
+                            "label": "16",
+                            "value": 16
+                          },
+                          {
+                            "label": "17",
+                            "value": 17
+                          },
+                          {
+                            "label": "18",
+                            "value": 18
+                          },
+                          {
+                            "label": "19",
+                            "value": 19
+                          },
+                          {
+                            "label": "20",
+                            "value": 20
+                          },
+                          {
+                            "label": "21",
+                            "value": 21
+                          },
+                          {
+                            "label": "22",
+                            "value": 22
+                          },
+                          {
+                            "label": "23",
+                            "value": 23
+                          },
+                          {
+                            "label": "24",
+                            "value": 24
+                          },
+                          {
+                            "label": "25",
+                            "value": 25
+                          },
+                          {
+                            "label": "26",
+                            "value": 26
+                          },
+                          {
+                            "label": "27",
+                            "value": 27
+                          },
+                          {
+                            "label": "28",
+                            "value": 28
+                          },
+                          {
+                            "label": "29",
+                            "value": 29
+                          },
+                          {
+                            "label": "30",
+                            "value": 30
+                          }
+                        ],
+                        "multiple": false,
+                        "value": 1
+                      },
+                      {
+                        "type": "select",
+                        "name": "duration_unit",
+                        "options": [
+                          {
+                            "label": "天",
+                            "value": 4
+                          },
+                          {
+                            "label": "周",
+                            "value": 5
+                          },
+                          {
+                            "label": "月",
+                            "value": 6
+                          },
+                          {
+                            "label": "年",
+                            "value": 7
+                          }
+                        ],
+                        "value": "4",
+                        "id": "u:6cd3bc0ea86c"
+                      }
+                    ]
+                  },
+                  {
                     "type": "textarea",
                     "name": "content",
                     "label": "任务内容",
                     "mode": "normal",
                     "id": "u:8dfadf06e6ae",
+                    "required": true,
                     "minRows": 3,
-                    "maxRows": 20,
-                    "required": true
+                    "maxRows": 20
                   },
                   {
                     "type": "input-repeat",
@@ -301,14 +463,14 @@
                     "label": "任务完成条件",
                     "mode": "normal",
                     "id": "u:e19162f2407f",
+                    "multiple": false,
+                    "required": true,
                     "options": [
                       {
                         "label": "人工点击完成按钮",
                         "value": 1
                       }
                     ],
-                    "multiple": false,
-                    "required": true,
                     "value": 1
                   },
                   {
@@ -943,15 +1105,166 @@
                               "required": true
                             },
                             {
-                              "type": "input-repeat",
-                              "name": "task_due_time",
+                              "type": "input-group",
                               "label": "任务完成时间",
                               "mode": "normal",
-                              "id": "u:c520ac7d5c17",
-                              "options": "hourly,daily,weekly,monthly,yearly",
-                              "required": true,
-                              "validateApi": "",
-                              "placeholder": "请选择"
+                              "id": "u:54c735b0afd6",
+                              "body": [
+                                {
+                                  "type": "select",
+                                  "label": "文本",
+                                  "name": "task_due_time_value",
+                                  "id": "u:7443d80b0039",
+                                  "options": [
+                                    {
+                                      "label": "1",
+                                      "value": 1
+                                    },
+                                    {
+                                      "label": "2",
+                                      "value": 2
+                                    },
+                                    {
+                                      "label": "3",
+                                      "value": 3
+                                    },
+                                    {
+                                      "label": "4",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "5",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "6",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "7",
+                                      "value": 7
+                                    },
+                                    {
+                                      "label": "8",
+                                      "value": 8
+                                    },
+                                    {
+                                      "label": "9",
+                                      "value": 9
+                                    },
+                                    {
+                                      "label": "10",
+                                      "value": 10
+                                    },
+                                    {
+                                      "label": "11",
+                                      "value": 11
+                                    },
+                                    {
+                                      "label": "12",
+                                      "value": 12
+                                    },
+                                    {
+                                      "label": "13",
+                                      "value": 13
+                                    },
+                                    {
+                                      "label": "14",
+                                      "value": 14
+                                    },
+                                    {
+                                      "label": "15",
+                                      "value": 15
+                                    },
+                                    {
+                                      "label": "16",
+                                      "value": 16
+                                    },
+                                    {
+                                      "label": "17",
+                                      "value": 17
+                                    },
+                                    {
+                                      "label": "18",
+                                      "value": 18
+                                    },
+                                    {
+                                      "label": "19",
+                                      "value": 19
+                                    },
+                                    {
+                                      "label": "20",
+                                      "value": 20
+                                    },
+                                    {
+                                      "label": "21",
+                                      "value": 21
+                                    },
+                                    {
+                                      "label": "22",
+                                      "value": 22
+                                    },
+                                    {
+                                      "label": "23",
+                                      "value": 23
+                                    },
+                                    {
+                                      "label": "24",
+                                      "value": 24
+                                    },
+                                    {
+                                      "label": "25",
+                                      "value": 25
+                                    },
+                                    {
+                                      "label": "26",
+                                      "value": 26
+                                    },
+                                    {
+                                      "label": "27",
+                                      "value": 27
+                                    },
+                                    {
+                                      "label": "28",
+                                      "value": 28
+                                    },
+                                    {
+                                      "label": "29",
+                                      "value": 29
+                                    },
+                                    {
+                                      "label": "30",
+                                      "value": 30
+                                    }
+                                  ],
+                                  "multiple": false,
+                                  "value": 1
+                                },
+                                {
+                                  "type": "select",
+                                  "name": "task_due_time_unit",
+                                  "options": [
+                                    {
+                                      "label": "天",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "周",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "月",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "年",
+                                      "value": 7
+                                    }
+                                  ],
+                                  "value": "4",
+                                  "id": "u:6cd3bc0ea86c"
+                                }
+                              ]
                             },
                             {
                               "type": "select",
@@ -1249,36 +1562,342 @@
                               "hiddenOn": "data.repeating_rules != 3"
                             },
                             {
-                              "type": "input-repeat",
-                              "name": "duration",
+                              "type": "input-group",
                               "label": "重复持续时长",
                               "mode": "normal",
-                              "id": "u:c520ac7d5c17",
-                              "options": "daily,weekly,monthly,yearly",
-                              "required": true,
-                              "validateApi": "",
-                              "placeholder": "请选择"
+                              "id": "u:54c735b0afd6",
+                              "body": [
+                                {
+                                  "type": "select",
+                                  "label": "文本",
+                                  "name": "duration_value",
+                                  "id": "u:7443d80b0039",
+                                  "options": [
+                                    {
+                                      "label": "1",
+                                      "value": 1
+                                    },
+                                    {
+                                      "label": "2",
+                                      "value": 2
+                                    },
+                                    {
+                                      "label": "3",
+                                      "value": 3
+                                    },
+                                    {
+                                      "label": "4",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "5",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "6",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "7",
+                                      "value": 7
+                                    },
+                                    {
+                                      "label": "8",
+                                      "value": 8
+                                    },
+                                    {
+                                      "label": "9",
+                                      "value": 9
+                                    },
+                                    {
+                                      "label": "10",
+                                      "value": 10
+                                    },
+                                    {
+                                      "label": "11",
+                                      "value": 11
+                                    },
+                                    {
+                                      "label": "12",
+                                      "value": 12
+                                    },
+                                    {
+                                      "label": "13",
+                                      "value": 13
+                                    },
+                                    {
+                                      "label": "14",
+                                      "value": 14
+                                    },
+                                    {
+                                      "label": "15",
+                                      "value": 15
+                                    },
+                                    {
+                                      "label": "16",
+                                      "value": 16
+                                    },
+                                    {
+                                      "label": "17",
+                                      "value": 17
+                                    },
+                                    {
+                                      "label": "18",
+                                      "value": 18
+                                    },
+                                    {
+                                      "label": "19",
+                                      "value": 19
+                                    },
+                                    {
+                                      "label": "20",
+                                      "value": 20
+                                    },
+                                    {
+                                      "label": "21",
+                                      "value": 21
+                                    },
+                                    {
+                                      "label": "22",
+                                      "value": 22
+                                    },
+                                    {
+                                      "label": "23",
+                                      "value": 23
+                                    },
+                                    {
+                                      "label": "24",
+                                      "value": 24
+                                    },
+                                    {
+                                      "label": "25",
+                                      "value": 25
+                                    },
+                                    {
+                                      "label": "26",
+                                      "value": 26
+                                    },
+                                    {
+                                      "label": "27",
+                                      "value": 27
+                                    },
+                                    {
+                                      "label": "28",
+                                      "value": 28
+                                    },
+                                    {
+                                      "label": "29",
+                                      "value": 29
+                                    },
+                                    {
+                                      "label": "30",
+                                      "value": 30
+                                    }
+                                  ],
+                                  "multiple": false,
+                                  "value": 1
+                                },
+                                {
+                                  "type": "select",
+                                  "name": "duration_unit",
+                                  "options": [
+                                    {
+                                      "label": "天",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "周",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "月",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "年",
+                                      "value": 7
+                                    }
+                                  ],
+                                  "value": "4",
+                                  "id": "u:6cd3bc0ea86c"
+                                }
+                              ]
                             },
                             {
                               "type": "textarea",
-                              "name": "content",
                               "label": "任务内容",
                               "mode": "normal",
                               "id": "u:8dfadf06e6ae",
+                              "name": "content",
+                              "required": true,
                               "minRows": 3,
-                              "maxRows": 20,
-                              "required": true
+                              "maxRows": 20
                             },
                             {
-                              "type": "input-repeat",
-                              "name": "task_due_time",
+                              "type": "input-group",
                               "label": "任务完成时间",
                               "mode": "normal",
-                              "id": "u:c520ac7d5c17",
-                              "options": "hourly,daily,weekly,monthly,yearly",
-                              "required": true,
-                              "validateApi": "",
-                              "placeholder": "请选择"
+                              "id": "u:54c735b0afd6",
+                              "body": [
+                                {
+                                  "type": "select",
+                                  "label": "文本",
+                                  "name": "task_due_time_value",
+                                  "id": "u:7443d80b0039",
+                                  "options": [
+                                    {
+                                      "label": "1",
+                                      "value": 1
+                                    },
+                                    {
+                                      "label": "2",
+                                      "value": 2
+                                    },
+                                    {
+                                      "label": "3",
+                                      "value": 3
+                                    },
+                                    {
+                                      "label": "4",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "5",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "6",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "7",
+                                      "value": 7
+                                    },
+                                    {
+                                      "label": "8",
+                                      "value": 8
+                                    },
+                                    {
+                                      "label": "9",
+                                      "value": 9
+                                    },
+                                    {
+                                      "label": "10",
+                                      "value": 10
+                                    },
+                                    {
+                                      "label": "11",
+                                      "value": 11
+                                    },
+                                    {
+                                      "label": "12",
+                                      "value": 12
+                                    },
+                                    {
+                                      "label": "13",
+                                      "value": 13
+                                    },
+                                    {
+                                      "label": "14",
+                                      "value": 14
+                                    },
+                                    {
+                                      "label": "15",
+                                      "value": 15
+                                    },
+                                    {
+                                      "label": "16",
+                                      "value": 16
+                                    },
+                                    {
+                                      "label": "17",
+                                      "value": 17
+                                    },
+                                    {
+                                      "label": "18",
+                                      "value": 18
+                                    },
+                                    {
+                                      "label": "19",
+                                      "value": 19
+                                    },
+                                    {
+                                      "label": "20",
+                                      "value": 20
+                                    },
+                                    {
+                                      "label": "21",
+                                      "value": 21
+                                    },
+                                    {
+                                      "label": "22",
+                                      "value": 22
+                                    },
+                                    {
+                                      "label": "23",
+                                      "value": 23
+                                    },
+                                    {
+                                      "label": "24",
+                                      "value": 24
+                                    },
+                                    {
+                                      "label": "25",
+                                      "value": 25
+                                    },
+                                    {
+                                      "label": "26",
+                                      "value": 26
+                                    },
+                                    {
+                                      "label": "27",
+                                      "value": 27
+                                    },
+                                    {
+                                      "label": "28",
+                                      "value": 28
+                                    },
+                                    {
+                                      "label": "29",
+                                      "value": 29
+                                    },
+                                    {
+                                      "label": "30",
+                                      "value": 30
+                                    }
+                                  ],
+                                  "multiple": false,
+                                  "value": 1
+                                },
+                                {
+                                  "type": "select",
+                                  "name": "task_due_time_unit",
+                                  "options": [
+                                    {
+                                      "label": "时",
+                                      "value": 3
+                                    },
+                                    {
+                                      "label": "天",
+                                      "value": 4
+                                    },
+                                    {
+                                      "label": "周",
+                                      "value": 5
+                                    },
+                                    {
+                                      "label": "月",
+                                      "value": 6
+                                    },
+                                    {
+                                      "label": "年",
+                                      "value": 7
+                                    }
+                                  ],
+                                  "value": "4",
+                                  "id": "u:6cd3bc0ea86c"
+                                }
+                              ]
                             },
                             {
                               "type": "select",
@@ -1292,9 +1911,9 @@
                                   "value": 1
                                 }
                               ],
+                              "required": true,
                               "multiple": false,
-                              "value": 1,
-                              "required": true
+                              "value": 1
                             },
                             {
                               "type": "nested-select",
@@ -1302,10 +1921,11 @@
                               "label": "执行者",
                               "mode": "normal",
                               "id": "u:cf62f9bffada",
+                              "multiple": false,
+                              "required": true,
                               "onlyChildren": true,
                               "searchable": true,
                               "onlyLeaf": true,
-                              "multiple": false,
                               "size": "lg",
                               "source": {
                                 "url": "/api/admin/upms/sysUser/getFollowerList",
@@ -1319,10 +1939,18 @@
                               "valueField": "value",
                               "clearable": true,
                               "placeholder": "请选择执行者",
-                              "hideNodePathLabel": true,
-                              "required": true
+                              "hideNodePathLabel": true
                             }
-                          ]
+                          ],
+                          "initApi": {
+                            "method": "get",
+                            "url": "/api/aio-program/task_rule/$task_rule_id/detail",
+                            "messages": {
+                            },
+                            "replaceData": true
+                          },
+                          "title": "编辑整体任务",
+                          "silentPolling": false
                         }
                       ],
                       "id": "u:f060a93dcf72"
