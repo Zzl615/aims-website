@@ -767,7 +767,7 @@
             "showInvalidMatch": false
           },
           {
-            "type": "select",
+            "type": "nested-select",
             "label": "执行者",
             "name": "executor_ids",
             "id": "u:cf62f9bffada",
