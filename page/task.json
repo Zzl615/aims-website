@@ -396,7 +396,8 @@
                           }
                         ],
                         "multiple": false,
-                        "value": 1
+                        "value": 1,
+                        "required": true
                       },
                       {
                         "type": "select",
@@ -419,10 +420,13 @@
                             "value": 7
                           }
                         ],
-                        "value": "4",
-                        "id": "u:6cd3bc0ea86c"
+                        "value": 5,
+                        "id": "u:6cd3bc0ea86c",
+                        "multiple": false,
+                        "required": true
                       }
-                    ]
+                    ],
+                    "required": true
                   },
                   {
                     "type": "textarea",
@@ -568,7 +572,8 @@
                           }
                         ],
                         "multiple": false,
-                        "value": 1
+                        "value": 1,
+                        "required": true
                       },
                       {
                         "type": "select",
@@ -595,10 +600,13 @@
                             "value": 7
                           }
                         ],
-                        "value": "4",
-                        "id": "u:6cd3bc0ea86c"
+                        "value": 3,
+                        "id": "u:6cd3bc0ea86c",
+                        "multiple": false,
+                        "required": true
                       }
-                    ]
+                    ],
+                    "required": true
                   },
                   {
                     "type": "select",
