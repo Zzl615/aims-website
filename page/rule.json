@@ -19,7 +19,8 @@
             "type": "text",
             "label": "触发类型",
             "name": "trigger_type_title",
-            "id": "u:7d7e37b62ac6"
+            "id": "u:7d7e37b62ac6",
+            "toggled": false
           },
           {
             "label": "重复规则",
@@ -38,6 +39,13 @@
             "type": "text",
             "name": "start_time",
             "id": "u:f765a44cebb2"
+          },
+          {
+            "type": "text",
+            "label": "创建时间",
+            "id": "u:d6079d76bd43",
+            "name": "create_time",
+            "toggled": false
           },
           {
             "label": "任务内容",
@@ -1356,6 +1364,38 @@
                   "id": "u:d686e69bd2f9"
                 },
                 "id": "u:4d528a999547"
+              },
+              {
+                "type": "button",
+                "label": "暂停",
+                "actionType": "ajax",
+                "level": "link",
+                "api": {
+                  "method": "post",
+                  "url": "/api/aio-program/task_rule/change_rule_status",
+                  "data": {
+                    "task_rule_id": "$task_rule_id",
+                    "status": 0
+                  }
+                },
+                "id": "u:e8087ecbdc4c",
+                "hiddenOn": "data.status != 1"
+              },
+              {
+                "type": "button",
+                "label": "继续",
+                "actionType": "ajax",
+                "level": "link",
+                "api": {
+                  "method": "post",
+                  "url": "/api/aio-program/task_rule/change_rule_status",
+                  "data": {
+                    "task_rule_id": "$task_rule_id",
+                    "status": 1
+                  }
+                },
+                "id": "u:e8087ecbdc4c",
+                "hiddenOn": "data.status != 0"
               },
               {
                 "type": "button",
