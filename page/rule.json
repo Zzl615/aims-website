@@ -16,9 +16,21 @@
             "id": "u:d69922dc6598"
           },
           {
+            "type": "text",
+            "label": "触发类型",
+            "name": "trigger_type_title",
+            "id": "u:7d7e37b62ac6"
+          },
+          {
             "label": "重复规则",
             "type": "text",
-            "name": "repeating_rules",
+            "name": "repeating_rules_title",
+            "id": "u:7d7e37b62ac6"
+          },
+          {
+            "label": "重复时间",
+            "type": "text",
+            "name": "duration_title",
             "id": "u:7d7e37b62ac6"
           },
           {
@@ -36,7 +48,7 @@
           {
             "label": "状态",
             "type": "text",
-            "name": "status",
+            "name": "status_title",
             "id": "u:11123c72be9c"
           },
           {
