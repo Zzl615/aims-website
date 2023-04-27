@@ -145,36 +145,87 @@
                     "minDate": "",
                     "maxDate": "",
                     "value": "",
-                    "mode": "normal"
+                    "mode": "normal",
+                    "required": true
+                  },
+                  {
+                    "id": "u:8deb319a96fa",
+                    "title": "任务发送日期 (数字之间需要用、隔开)",
+                    "collapsable": false,
+                    "body": [
+                      {
+                        "type": "group",
+                        "body": [
+                          {
+                            "type": "input-text",
+                            "label": "任务生效后",
+                            "name": "offset_date_values",
+                            "id": "u:a3b16263a708",
+                            "clearable": true
+                          },
+                          {
+                            "type": "select",
+                            "label": "",
+                            "name": "offset_date_unit",
+                            "options": [
+                              {
+                                "label": "天",
+                                "value": 4
+                              },
+                              {
+                                "label": "周",
+                                "value": 5
+                              },
+                              {
+                                "label": "月",
+                                "value": 6
+                              },
+                              {
+                                "label": "年",
+                                "value": 7
+                              }
+                            ],
+                            "id": "u:21d8793931a6",
+                            "mode": "normal",
+                            "multiple": false,
+                            "clearable": true
+                          }
+                        ],
+                        "id": "u:d36a2e0a8939"
+                      }
+                    ],
+                    "subFormMode": "",
+                    "type": "fieldSet"
                   },
                   {
                     "type": "select",
                     "name": "repeating_rules",
                     "label": "重复规则",
                     "id": "u:ba434a14b747",
+                    "mode": "normal",
                     "options": [
                       {
+                        "label": "不重复",
+                        "value": 0
+                      },
+                      {
                         "label": "每天",
-                        "value": "1"
+                        "value": 1
                       },
                       {
                         "label": "每周",
-                        "value": "2"
-                      },
-                      {
-                        "label": "间隔",
-                        "value": "3"
+                        "value": 2
                       }
                     ],
-                    "mode": "normal",
                     "multiple": false,
-                    "value": "1"
+                    "value": 0
                   },
                   {
                     "type": "button-group-select",
+                    "id": "u:811b3b103424",
+                    "hiddenOn": "data.repeating_rules != 2",
                     "name": "weekly_repeat_days",
                     "label": "任务生效后",
-                    "id": "u:811b3b103424",
                     "mode": "normal",
                     "inline": false,
                     "options": [
@@ -210,57 +261,8 @@
                     "multiple": true,
                     "joinValues": false,
                     "extractValue": true,
-                    "hiddenOn": "data.repeating_rules != 2",
                     "clearValueOnHidden": true,
                     "static": false
-                  },
-                  {
-                    "type": "fieldSet",
-                    "id": "u:8deb319a96fa",
-                    "title": "选择任务发送间隔",
-                    "collapsable": false,
-                    "body": [
-                      {
-                        "type": "group",
-                        "body": [
-                          {
-                            "type": "input-text",
-                            "label": "任务生效后",
-                            "name": "interval_repeat_value",
-                            "id": "u:a3b16263a708"
-                          },
-                          {
-                            "type": "select",
-                            "label": "",
-                            "name": "interval_repeat_unit",
-                            "options": [
-                              {
-                                "label": "天",
-                                "value": 4
-                              },
-                              {
-                                "label": "周",
-                                "value": 5
-                              },
-                              {
-                                "label": "月",
-                                "value": 6
-                              },
-                              {
-                                "label": "年",
-                                "value": 7
-                              }
-                            ],
-                            "id": "u:21d8793931a6",
-                            "mode": "normal"
-                          }
-                        ],
-                        "id": "u:d36a2e0a8939"
-                      }
-                    ],
-                    "subFormMode": "",
-                    "className": "Collapse--base",
-                    "hiddenOn": "data.repeating_rules != 3"
                   },
                   {
                     "type": "input-group",
@@ -396,8 +398,7 @@
                           }
                         ],
                         "multiple": false,
-                        "value": 1,
-                        "required": true
+                        "value": 1
                       },
                       {
                         "type": "select",
@@ -426,7 +427,8 @@
                         "required": true
                       }
                     ],
-                    "required": true
+                    "required": true,
+                    "hiddenOn": "data.repeating_rules == 0"
                   },
                   {
                     "type": "textarea",
@@ -653,7 +655,8 @@
                     "extractValue": true
                   }
                 ],
-                "id": "u:174002ed55b6"
+                "id": "u:174002ed55b6",
+                "wrapWithPanel": false
               }
             ],
             "type": "dialog",
