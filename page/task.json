@@ -55,7 +55,7 @@
       ],
       "headerToolbar": [
         {
-          "label": "新增",
+          "label": "新增任务",
           "type": "button",
           "actionType": "dialog",
           "level": "primary",
@@ -188,7 +188,8 @@
                             "id": "u:21d8793931a6",
                             "mode": "normal",
                             "multiple": false,
-                            "clearable": true
+                            "clearable": true,
+                            "value": 4
                           }
                         ],
                         "id": "u:d36a2e0a8939"
@@ -674,7 +675,7 @@
           {
             "type": "nested-select",
             "name": "patient_ids",
-            "label": "患者",
+            "label": "用户",
             "id": "u:cf62f9bffada",
             "onlyChildren": true,
             "searchable": true,
@@ -894,10 +895,11 @@
           "id": "u:ca74909b7465"
         },
         {
-          "label": "患者",
+          "label": "用户",
           "type": "text",
           "name": "patients",
-          "id": "u:d6079d76bd43"
+          "id": "u:d6079d76bd43",
+          "placeholder": "-"
         },
         {
           "label": "执行者",
@@ -1476,14 +1478,11 @@
                           "weight": 0,
                           "actions": [
                             {
-                              "actionType": "goBack"
-                            },
-                            {
+                              "actionType": "reload",
                               "componentId": "u:a7af374da67d",
                               "args": {
                                 "resetPage": false
                               },
-                              "actionType": "reload",
                               "data": null
                             }
                           ]
@@ -1595,6 +1594,56 @@
                               "required": true
                             },
                             {
+                              "type": "fieldSet",
+                              "id": "u:8deb319a96fa",
+                              "title": "任务发送日期 (数字之间需要用、隔开)",
+                              "collapsable": false,
+                              "body": [
+                                {
+                                  "type": "group",
+                                  "body": [
+                                    {
+                                      "type": "input-text",
+                                      "label": "任务生效后",
+                                      "name": "offset_date_values",
+                                      "id": "u:a3b16263a708",
+                                      "clearable": true
+                                    },
+                                    {
+                                      "type": "select",
+                                      "label": "",
+                                      "name": "offset_date_unit",
+                                      "options": [
+                                        {
+                                          "label": "天",
+                                          "value": 4
+                                        },
+                                        {
+                                          "label": "周",
+                                          "value": 5
+                                        },
+                                        {
+                                          "label": "月",
+                                          "value": 6
+                                        },
+                                        {
+                                          "label": "年",
+                                          "value": 7
+                                        }
+                                      ],
+                                      "id": "u:21d8793931a6",
+                                      "mode": "normal",
+                                      "multiple": false,
+                                      "clearable": true,
+                                      "value": 4
+                                    }
+                                  ],
+                                  "id": "u:d36a2e0a8939"
+                                }
+                              ],
+                              "subFormMode": ""
+                            },
+                            {
                               "type": "select",
                               "name": "repeating_rules",
                               "label": "重复规则",
@@ -1602,28 +1651,28 @@
                               "id": "u:ba434a14b747",
                               "options": [
                                 {
+                                  "label": "不重复",
+                                  "value": 0
+                                },
+                                {
                                   "label": "每天",
-                                  "value": "1"
+                                  "value": 1
                                 },
                                 {
                                   "label": "每周",
-                                  "value": "2"
-                                },
-                                {
-                                  "label": "间隔",
-                                  "value": "3"
+                                  "value": 2
                                 }
                               ],
                               "multiple": false,
-                              "required": true,
-                              "value": "1"
+                              "value": 0
                             },
                             {
                               "type": "button-group-select",
+                              "id": "u:811b3b103424",
+                              "hiddenOn": "data.repeating_rules != 2",
                               "name": "weekly_repeat_days",
                               "label": "任务生效后",
                               "mode": "normal",
-                              "id": "u:811b3b103424",
                               "options": [
                                 {
                                   "label": "第1天",
@@ -1658,55 +1707,8 @@
                               "multiple": true,
                               "joinValues": false,
                               "extractValue": true,
-                              "hiddenOn": "data.repeating_rules != 2"
-                            },
-                            {
-                              "type": "fieldSet",
-                              "id": "u:8deb319a96fa",
-                              "title": "选择任务发送间隔",
-                              "collapsable": false,
-                              "body": [
-                                {
-                                  "type": "group",
-                                  "body": [
-                                    {
-                                      "type": "input-text",
-                                      "label": "任务生效后",
-                                      "name": "interval_repeat_value",
-                                      "id": "u:a3b16263a708"
-                                    },
-                                    {
-                                      "type": "select",
-                                      "label": "",
-                                      "name": "interval_repeat_unit",
-                                      "options": [
-                                        {
-                                          "label": "天",
-                                          "value": 4
-                                        },
-                                        {
-                                          "label": "周",
-                                          "value": 5
-                                        },
-                                        {
-                                          "label": "月",
-                                          "value": 6
-                                        },
-                                        {
-                                          "label": "年",
-                                          "value": 7
-                                        }
-                                      ],
-                                      "id": "u:21d8793931a6",
-                                      "mode": "normal"
-                                    }
-                                  ],
-                                  "id": "u:d36a2e0a8939"
-                                }
-                              ],
-                              "subFormMode": "",
-                              "className": "Collapse--base",
-                              "hiddenOn": "data.repeating_rules != 3"
+                              "clearValueOnHidden": true,
+                              "static": false
                             },
                             {
                               "type": "input-group",
@@ -1865,10 +1867,14 @@
                                       "value": 7
                                     }
                                   ],
-                                  "value": "4",
-                                  "id": "u:6cd3bc0ea86c"
+                                  "value": 5,
+                                  "id": "u:6cd3bc0ea86c",
+                                  "multiple": false,
+                                  "required": true
                                 }
-                              ]
+                              ],
+                              "required": true,
+                              "hiddenOn": "data.repeating_rules == 0"
                             },
                             {
                               "type": "textarea",
@@ -2123,7 +2129,7 @@
                   "task_id": "${task_id}"
                 }
               },
-              "hiddenOn": "data.status == 5"
+              "hiddenOn": "data.status == 5||data.status == 4"
             },
             {
               "type": "button",
@@ -2151,8 +2157,10 @@
                     "label": "删除当前任务",
                     "api": {
                       "method": "post",
-                      "url": "/api/aio-program/task_rule/delete?task_id=${task_id}&remove_all=0",
-                      "messages": {
+                      "url": "/api/aio-program/task_rule/delete",
+                      "data": {
+                        "task_id": "$task_id",
+                        "remove_all": 0
                       }
                     },
                     "id": "u:ef7d52424189",
@@ -2163,19 +2171,8 @@
                         "actions": [
                           {
                             "componentId": "u:a7af374da67d",
-                            "args": {
-                              "resetPage": true
-                            },
                             "actionType": "reload",
-                            "dataMergeMode": "merge"
-                          },
-                          {
-                            "componentId": "u:a7af374da67d",
-                            "args": {
-                              "resetPage": false
-                            },
-                            "actionType": "reload",
-                            "dataMergeMode": "override"
+                            "groupType": "component"
                           }
                         ]
                       }
@@ -2187,8 +2184,10 @@
                     "label": "删除全部任务",
                     "api": {
                       "method": "post",
-                      "url": "/api/aio-program/task_rule/delete?task_id=${task_id}&remove_all=1",
-                      "messages": {
+                      "url": "/api/aio-program/task_rule/delete",
+                      "data": {
+                        "task_id": "$task_id",
+                        "remove_all": 0
                       }
                     },
                     "id": "u:716189444a40",
@@ -2199,11 +2198,8 @@
                         "actions": [
                           {
                             "componentId": "u:a7af374da67d",
-                            "args": {
-                              "resetPage": false
-                            },
                             "actionType": "reload",
-                            "dataMergeMode": "override"
+                            "groupType": "component"
                           }
                         ]
                       }
@@ -2216,14 +2212,6 @@
                 "click": {
                   "weight": 0,
                   "actions": [
-                    {
-                      "componentId": "u:a7af374da67d",
-                      "args": {
-                        "resetPage": false
-                      },
-                      "actionType": "reload",
-                      "data": null
-                    }
                   ]
                 }
               }
@@ -2260,12 +2248,12 @@
     }
   ],
   "id": "u:66f83a04abd7",
-  "pullRefresh": {
-    "disabled": true
-  },
   "asideResizor": false,
   "style": {
     "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "pullRefresh": {
+    "disabled": true
   },
   "title": "任务列表",
   "regions": [
