@@ -910,8 +910,9 @@
         {
           "label": "创建者",
           "type": "text",
-          "name": "name",
-          "id": "u:7684e27158f4"
+          "name": "create_name",
+          "id": "u:7684e27158f4",
+          "placeholder": "-"
         },
         {
           "label": "开始时间",
@@ -1156,6 +1157,7 @@
                     "actionType": "dialog",
                     "label": "修改当前任务",
                     "dialog": {
+                      "type": "dialog",
                       "title": "编辑",
                       "body": [
                         {
@@ -1464,29 +1466,34 @@
                               "hideNodePathLabel": true,
                               "required": true
                             }
-                          ]
+                          ],
+                          "onEvent": {
+                            "submitSucc": {
+                              "weight": 0,
+                              "actions": [
+                                {
+                                  "componentId": "u:a7af374da67d",
+                                  "args": {
+                                    "resetPage": false
+                                  },
+                                  "actionType": "reload",
+                                  "data": null
+                                },
+                                {
+                                  "componentId": "u:48118c859ba3",
+                                  "actionType": "hidden"
+                                }
+                              ]
+                            }
+                          }
                         }
                       ],
-                      "type": "dialog",
                       "id": "u:f060a93dcf72",
                       "showCloseButton": true,
                       "closeOnEsc": false,
                       "showErrorMsg": true,
                       "showLoading": true,
                       "onEvent": {
-                        "confirm": {
-                          "weight": 0,
-                          "actions": [
-                            {
-                              "actionType": "reload",
-                              "componentId": "u:a7af374da67d",
-                              "args": {
-                                "resetPage": false
-                              },
-                              "data": null
-                            }
-                          ]
-                        }
                       }
                     },
                     "id": "u:4ceaa72cb347"
@@ -2103,17 +2110,54 @@
                             "replaceData": true
                           },
                           "title": "编辑整体任务",
-                          "silentPolling": false
+                          "silentPolling": false,
+                          "onEvent": {
+                            "submitSucc": {
+                              "weight": 0,
+                              "actions": [
+                                {
+                                  "componentId": "u:a7af374da67d",
+                                  "args": {
+                                    "resetPage": false
+                                  },
+                                  "actionType": "reload",
+                                  "data": null
+                                },
+                                {
+                                  "componentId": "u:48118c859ba3",
+                                  "actionType": "hidden"
+                                }
+                              ]
+                            }
+                          }
                         }
                       ],
-                      "id": "u:f060a93dcf72"
+                      "id": "u:f060a93dcf72",
+                      "showCloseButton": true,
+                      "closeOnEsc": false,
+                      "showErrorMsg": true,
+                      "showLoading": true,
+                      "onEvent": {
+                      }
                     },
                     "id": "u:b599e5f93be6"
                   }
                 ],
-                "id": "u:48118c859ba3"
+                "id": "u:48118c859ba3",
+                "showCloseButton": true,
+                "closeOnEsc": false,
+                "showErrorMsg": true,
+                "showLoading": true,
+                "onEvent": {
+                  "cancel": {
+                    "weight": 0,
+                    "actions": [
+                    ]
+                  }
+                }
               },
-              "level": "link"
+              "level": "link",
+              "hiddenOn": "data.status == 5"
             },
             {
               "label": "完成",
@@ -2153,16 +2197,7 @@
                 "actions": [
                   {
                     "type": "button",
-                    "actionType": "ajax",
                     "label": "删除当前任务",
-                    "api": {
-                      "method": "post",
-                      "url": "/api/aio-program/task_rule/delete",
-                      "data": {
-                        "task_id": "$task_id",
-                        "remove_all": 0
-                      }
-                    },
                     "id": "u:ef7d52424189",
                     "close": true,
                     "onEvent": {
@@ -2170,9 +2205,31 @@
                         "weight": 0,
                         "actions": [
                           {
-                            "componentId": "u:a7af374da67d",
+                            "args": {
+                              "options": {
+                              },
+                              "api": {
+                                "url": "/api/aio-program/task_rule/delete",
+                                "method": "post",
+                                "messages": {
+                                },
+                                "dataType": "json",
+                                "data": {
+                                  "task_id": "$task_id",
+                                  "remove_all": 0
+                                }
+                              }
+                            },
+                            "actionType": "ajax",
+                            "outputVar": "responseResult"
+                          },
+                          {
+                            "args": {
+                              "resetPage": false
+                            },
                             "actionType": "reload",
-                            "groupType": "component"
+                            "componentId": "u:a7af374da67d",
+                            "data": null
                           }
                         ]
                       }
@@ -2180,16 +2237,7 @@
                   },
                   {
                     "type": "button",
-                    "actionType": "ajax",
                     "label": "删除全部任务",
-                    "api": {
-                      "method": "post",
-                      "url": "/api/aio-program/task_rule/delete",
-                      "data": {
-                        "task_id": "$task_id",
-                        "remove_all": 0
-                      }
-                    },
                     "id": "u:716189444a40",
                     "close": true,
                     "onEvent": {
@@ -2197,9 +2245,31 @@
                         "weight": 0,
                         "actions": [
                           {
-                            "componentId": "u:a7af374da67d",
+                            "actionType": "ajax",
+                            "args": {
+                              "options": {
+                              },
+                              "api": {
+                                "url": "/api/aio-program/task_rule/delete",
+                                "method": "post",
+                                "messages": {
+                                },
+                                "dataType": "json",
+                                "data": {
+                                  "task_id": "$task_id",
+                                  "remove_all": 1
+                                }
+                              }
+                            },
+                            "outputVar": "responseResult"
+                          },
+                          {
+                            "args": {
+                              "resetPage": false
+                            },
                             "actionType": "reload",
-                            "groupType": "component"
+                            "componentId": "u:a7af374da67d",
+                            "data": null
                           }
                         ]
                       }
