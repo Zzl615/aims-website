@@ -60,13 +60,17 @@
           "actionType": "dialog",
           "level": "primary",
           "dialog": {
+            "type": "dialog",
             "title": "新增",
             "body": [
               {
                 "type": "form",
                 "api": {
                   "method": "post",
-                  "url": "/api/aio-program/task_rule"
+                  "url": "/api/aio-program/task_rule",
+                  "messages": {
+                  },
+                  "requestAdaptor": "console.log('api', api);\nif (api.method === 'post') {\n  for (let key in api.data) {\n    if (api.data[key] === '') {\n      delete api.data[key];\n    } else {\n      if (key === 'lib_materials') {\n        api.data[key] = api.data[key].map(material => {\n          const { materialType, id } = material;\n          return { type: materialType, id };\n        });\n        console.log('lib_materials' + key, api.data[key]);\n      }\n    }\n  }\n  api.url = api.url.split('?')[0] + '?' + new URLSearchParams(api.query);\n}\n\nreturn api;\n"
                 },
                 "body": [
                   {
@@ -146,7 +150,8 @@
                     "maxDate": "",
                     "value": "",
                     "mode": "normal",
-                    "required": true
+                    "required": true,
+                    "clearValueOnHidden": true
                   },
                   {
                     "id": "u:8deb319a96fa",
@@ -224,7 +229,6 @@
                   {
                     "type": "button-group-select",
                     "id": "u:811b3b103424",
-                    "hiddenOn": "data.repeating_rules != 2",
                     "name": "weekly_repeat_days",
                     "label": "任务生效后",
                     "mode": "normal",
@@ -263,7 +267,11 @@
                     "joinValues": false,
                     "extractValue": true,
                     "clearValueOnHidden": true,
-                    "static": false
+                    "static": false,
+                    "value": [
+                      1
+                    ],
+                    "hiddenOn": "data.repeating_rules != 2"
                   },
                   {
                     "type": "input-group",
@@ -442,10 +450,392 @@
                     "maxRows": 20
                   },
                   {
+                    "type": "picker",
+                    "name": "lib_materials",
+                    "label": "素材",
+                    "mode": "normal",
+                    "id": "u:81ae9353c86a",
+                    "multiple": true,
+                    "joinValues": false,
+                    "valueField": "task_material_id",
+                    "labelField": "title",
+                    "source": {
+                      "method": "post",
+                      "url": "/api/admin/materialcenter/allMaterial/list",
+                      "messages": {
+                      },
+                      "dataType": "json",
+                      "data": {
+                        "pageParam": {
+                          "pageNum": "${pageNum}",
+                          "pageSize": "${pageSize}"
+                        },
+                        "allMaterialDtoFilter": {
+                          "title": "${title}",
+                          "type": 2,
+                          "materialType": "${materialType}",
+                          "labelIdListString": "${label}"
+                        },
+                        "orderParm": [
+                          {
+                            "fieldName": "createTime",
+                            "asc": 1
+                          }
+                        ]
+                      },
+                      "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
+                    },
+                    "size": "lg",
+                    "value": "",
+                    "pickerSchema": {
+                      "mode": "table",
+                      "name": "thelist",
+                      "draggable": true,
+                      "headerToolbar": {
+                        "wrapWithPanel": false,
+                        "type": "form",
+                        "className": "text-right",
+                        "target": "thelist",
+                        "mode": "inline",
+                        "body": [
+                          {
+                            "type": "input-text",
+                            "name": "title",
+                            "addOn": {
+                              "type": "submit",
+                              "label": "搜索",
+                              "level": "primary",
+                              "icon": "fa fa-search pull-left",
+                              "id": "u:4051a516bea0"
+                            },
+                            "id": "u:436a531ae90c"
+                          },
+                          {
+                            "type": "button-group-select",
+                            "name": "materialType",
+                            "label": "类型",
+                            "inline": false,
+                            "options": [
+                              {
+                                "label": "全部",
+                                "value": 0
+                              },
+                              {
+                                "label": "富文本",
+                                "value": 2
+                              },
+                              {
+                                "label": "纯文本",
+                                "value": 1
+                              },
+                              {
+                                "label": "链接",
+                                "value": 3
+                              }
+                            ],
+                            "id": "u:46bedb90b7e6",
+                            "multiple": false,
+                            "value": 1
+                          }
+                        ],
+                        "id": "u:224d46a01acf"
+                      },
+                      "footerToolbar": [
+                        {
+                          "type": "statistics",
+                          "align": "left"
+                        },
+                        {
+                          "type": "pagination",
+                          "align": "right"
+                        },
+                        {
+                          "type": "switch-per-page",
+                          "tpl": "内容",
+                          "wrapperComponent": "",
+                          "id": "u:9138cd5259bc",
+                          "align": "right"
+                        }
+                      ],
+                      "columns": [
+                        {
+                          "name": "title",
+                          "label": "标题",
+                          "type": "text",
+                          "id": "u:831a9a9c1291",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break ",
+                          "align": "left"
+                        },
+                        {
+                          "name": "materialType",
+                          "label": "类型",
+                          "type": "mapping",
+                          "id": "u:0a0cb7c7f5ae",
+                          "placeholder": "-",
+                          "width": 50,
+                          "className": "word-break ",
+                          "map": {
+                            "1": "纯文本",
+                            "2": "富文本",
+                            "3": "链接"
+                          },
+                          "align": "left"
+                        },
+                        {
+                          "name": "description",
+                          "label": "内容描述",
+                          "type": "text",
+                          "id": "u:b31367aa876d",
+                          "placeholder": "-",
+                          "width": 150,
+                          "className": "word-break ",
+                          "style": {
+                            "-webkit-line-clamp": "2",
+                            "display": "-webkit-box",
+                            "-webkit-box-orient": "vertical",
+                            "text-overflow": "inherit",
+                            "overflow": "hidden",
+                            "text-align": "center",
+                            "padding": "2px",
+                            "position": "absolute",
+                            "top": "50%",
+                            "transform": "translateY(-50%)"
+                          },
+                          "popOver": false,
+                          "align": "center"
+                        }
+                      ],
+                      "id": "u:4e9cfd2a2de9",
+                      "perPage": 20,
+                      "perPageField": "pageSize",
+                      "perPageAvailable": [
+                        10,
+                        20,
+                        50
+                      ],
+                      "messages": {
+                      },
+                      "primaryField": "task_material_id",
+                      "defaultParams": {
+                      },
+                      "pageField": "pageNum"
+                    },
+                    "clearValueOnHidden": true
+                  },
+                  {
+                    "type": "picker",
+                    "label": "任务素材",
+                    "mode": "normal",
+                    "id": "u:81ae9353c86a",
+                    "name": "task_materials",
+                    "multiple": true,
+                    "size": "lg",
+                    "source": {
+                      "url": "/api/aio-program/task_material/list?material_type=$material_type&page=$page&page_size=$page_size",
+                      "method": "post",
+                      "messages": {
+                      },
+                      "dataType": "json"
+                    },
+                    "joinValues": false,
+                    "valueField": "task_material_id",
+                    "labelField": "title",
+                    "value": "",
+                    "pickerSchema": {
+                      "mode": "table",
+                      "name": "thelist",
+                      "draggable": true,
+                      "headerToolbar": {
+                        "wrapWithPanel": false,
+                        "type": "form",
+                        "className": "text-right",
+                        "target": "thelist",
+                        "mode": "inline",
+                        "body": [
+                          {
+                            "type": "input-text",
+                            "name": "title",
+                            "addOn": {
+                              "type": "submit",
+                              "label": "搜索",
+                              "level": "primary",
+                              "icon": "fa fa-search pull-left",
+                              "id": "u:4051a516bea0"
+                            },
+                            "id": "u:436a531ae90c"
+                          },
+                          {
+                            "type": "button-group-select",
+                            "name": "material_type",
+                            "label": "类型",
+                            "inline": false,
+                            "options": [
+                              {
+                                "label": "全部",
+                                "value": 0
+                              },
+                              {
+                                "label": "富文本",
+                                "value": 2
+                              },
+                              {
+                                "label": "纯文本",
+                                "value": 1
+                              },
+                              {
+                                "label": "链接",
+                                "value": 3
+                              },
+                              {
+                                "label": "问卷",
+                                "value": 4
+                              }
+                            ],
+                            "id": "u:46bedb90b7e6",
+                            "multiple": false,
+                            "value": 1
+                          }
+                        ],
+                        "id": "u:224d46a01acf"
+                      },
+                      "footerToolbar": [
+                        {
+                          "type": "statistics",
+                          "align": "left"
+                        },
+                        {
+                          "type": "pagination",
+                          "align": "right"
+                        },
+                        {
+                          "type": "switch-per-page",
+                          "tpl": "内容",
+                          "wrapperComponent": "",
+                          "id": "u:9138cd5259bc",
+                          "align": "right"
+                        }
+                      ],
+                      "columns": [
+                        {
+                          "name": "title",
+                          "label": "素材标题",
+                          "type": "text",
+                          "id": "u:89650c95c349",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break ",
+                          "align": "left"
+                        },
+                        {
+                          "name": "material_type",
+                          "label": "素材类型",
+                          "type": "text",
+                          "id": "u:5083b08e8cce",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break "
+                        },
+                        {
+                          "name": "content",
+                          "label": "素材内容",
+                          "type": "text",
+                          "id": "u:5da3bab9b391",
+                          "placeholder": "-",
+                          "width": "",
+                          "className": "word-break "
+                        },
+                        {
+                          "name": "task_id",
+                          "label": "任务id",
+                          "type": "text",
+                          "id": "u:1c9e6d15bb58",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break "
+                        },
+                        {
+                          "name": "task_name",
+                          "label": "任务名称",
+                          "type": "text",
+                          "id": "u:8815992cde69",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break "
+                        },
+                        {
+                          "type": "text",
+                          "label": "执行者",
+                          "width": 100,
+                          "name": "user_name",
+                          "id": "u:8e83f296bf63",
+                          "placeholder": "-",
+                          "className": "word-break "
+                        },
+                        {
+                          "type": "text",
+                          "label": "目标用户",
+                          "name": "patient_name",
+                          "id": "u:8dcb5d564ca3",
+                          "placeholder": "-",
+                          "className": "word-break ",
+                          "width": 150
+                        }
+                      ],
+                      "id": "u:4e9cfd2a2de9",
+                      "perPage": 20,
+                      "perPageField": "page_size",
+                      "perPageAvailable": [
+                        10
+                      ],
+                      "messages": {
+                      },
+                      "primaryField": "task_material_id",
+                      "defaultParams": {
+                      }
+                    },
+                    "clearValueOnHidden": true,
+                    "disabled": false,
+                    "hidden": true
+                  },
+                  {
+                    "type": "nested-select",
+                    "label": "执行者",
+                    "mode": "normal",
+                    "id": "u:cf62f9bffada",
+                    "required": true,
+                    "name": "user_ids",
+                    "multiple": true,
+                    "onlyChildren": true,
+                    "searchable": true,
+                    "onlyLeaf": true,
+                    "size": "full",
+                    "source": {
+                      "url": "/api/admin/upms/sysUser/getFollowerList",
+                      "method": "get",
+                      "messages": {
+                      },
+                      "adaptor": "",
+                      "dataType": "json"
+                    },
+                    "clearable": true,
+                    "placeholder": "请选择执行者",
+                    "hideNodePathLabel": true,
+                    "joinValues": false,
+                    "extractValue": true,
+                    "className": "",
+                    "inputClassName": "",
+                    "labelClassName": "",
+                    "staticClassName": "",
+                    "borderMode": "full"
+                  },
+                  {
                     "type": "input-group",
                     "label": "任务完成时间",
                     "mode": "normal",
                     "id": "u:54c735b0afd6",
+                    "required": true,
                     "body": [
                       {
                         "type": "select",
@@ -608,8 +998,7 @@
                         "multiple": false,
                         "required": true
                       }
-                    ],
-                    "required": true
+                    ]
                   },
                   {
                     "type": "select",
@@ -626,42 +1015,23 @@
                     "required": true,
                     "multiple": false,
                     "value": 1
-                  },
-                  {
-                    "type": "nested-select",
-                    "name": "user_ids",
-                    "label": "执行者",
-                    "mode": "normal",
-                    "id": "u:cf62f9bffada",
-                    "multiple": true,
-                    "required": true,
-                    "onlyChildren": true,
-                    "searchable": true,
-                    "onlyLeaf": true,
-                    "size": "lg",
-                    "source": {
-                      "url": "/api/admin/upms/sysUser/getFollowerList",
-                      "method": "get",
-                      "messages": {
-                      },
-                      "adaptor": "",
-                      "dataType": "json"
-                    },
-                    "labelField": "label",
-                    "valueField": "value",
-                    "clearable": true,
-                    "placeholder": "请选择执行者",
-                    "hideNodePathLabel": true,
-                    "joinValues": false,
-                    "extractValue": true
                   }
                 ],
                 "id": "u:174002ed55b6",
                 "wrapWithPanel": false
               }
             ],
-            "type": "dialog",
-            "id": "u:0dfa71db8ab5"
+            "id": "u:0dfa71db8ab5",
+            "showCloseButton": true,
+            "closeOnEsc": false,
+            "showErrorMsg": true,
+            "showLoading": true,
+            "data": {
+            },
+            "dataMap": {
+            },
+            "withDefaultData": false,
+            "dataMapSwitch": true
           },
           "id": "u:c59d84dde548"
         },
@@ -1263,6 +1633,32 @@
                               "required": true
                             },
                             {
+                              "type": "nested-select",
+                              "label": "执行者",
+                              "mode": "normal",
+                              "id": "u:cf62f9bffada",
+                              "name": "user_id",
+                              "onlyChildren": true,
+                              "searchable": true,
+                              "onlyLeaf": true,
+                              "multiple": false,
+                              "size": "full",
+                              "source": {
+                                "url": "/api/admin/upms/sysUser/getFollowerList",
+                                "method": "get",
+                                "messages": {
+                                },
+                                "adaptor": "",
+                                "dataType": "json"
+                              },
+                              "labelField": "label",
+                              "valueField": "value",
+                              "clearable": true,
+                              "placeholder": "请选择执行者",
+                              "hideNodePathLabel": true,
+                              "required": true
+                            },
+                            {
                               "type": "input-group",
                               "label": "任务完成时间",
                               "mode": "normal",
@@ -1430,41 +1826,15 @@
                               "label": "任务完成条件",
                               "mode": "normal",
                               "id": "u:e19162f2407f",
+                              "multiple": false,
+                              "required": true,
                               "options": [
                                 {
                                   "label": "人工点击完成按钮",
                                   "value": 1
                                 }
                               ],
-                              "multiple": false,
-                              "value": 1,
-                              "required": true
-                            },
-                            {
-                              "type": "nested-select",
-                              "name": "user_id",
-                              "label": "执行者",
-                              "mode": "normal",
-                              "id": "u:cf62f9bffada",
-                              "onlyChildren": true,
-                              "searchable": true,
-                              "onlyLeaf": true,
-                              "multiple": false,
-                              "size": "lg",
-                              "source": {
-                                "url": "/api/admin/upms/sysUser/getFollowerList",
-                                "method": "get",
-                                "messages": {
-                                },
-                                "adaptor": "",
-                                "dataType": "json"
-                              },
-                              "labelField": "label",
-                              "valueField": "value",
-                              "clearable": true,
-                              "placeholder": "请选择执行者",
-                              "hideNodePathLabel": true,
-                              "required": true
+                              "value": 1
                             }
                           ],
                           "onEvent": {
@@ -1481,7 +1851,8 @@
                                 },
                                 {
                                   "componentId": "u:48118c859ba3",
-                                  "actionType": "hidden"
+                                  "actionType": "cancel",
+                                  "groupType": "component"
                                 }
                               ]
                             }
@@ -1894,6 +2265,32 @@
                               "maxRows": 20
                             },
                             {
+                              "type": "nested-select",
+                              "label": "执行者",
+                              "mode": "normal",
+                              "id": "u:cf62f9bffada",
+                              "name": "user_id",
+                              "multiple": false,
+                              "required": true,
+                              "onlyChildren": true,
+                              "searchable": true,
+                              "onlyLeaf": true,
+                              "size": "full",
+                              "source": {
+                                "url": "/api/admin/upms/sysUser/getFollowerList",
+                                "method": "get",
+                                "messages": {
+                                },
+                                "adaptor": "",
+                                "dataType": "json"
+                              },
+                              "labelField": "label",
+                              "valueField": "value",
+                              "clearable": true,
+                              "placeholder": "请选择执行者",
+                              "hideNodePathLabel": true
+                            },
+                            {
                               "type": "input-group",
                               "label": "任务完成时间",
                               "mode": "normal",
@@ -2065,41 +2462,15 @@
                               "label": "任务完成条件",
                               "mode": "normal",
                               "id": "u:e19162f2407f",
+                              "multiple": false,
+                              "required": true,
                               "options": [
                                 {
                                   "label": "人工点击完成按钮",
                                   "value": 1
                                 }
                               ],
-                              "required": true,
-                              "multiple": false,
                               "value": 1
-                            },
-                            {
-                              "type": "nested-select",
-                              "name": "user_id",
-                              "label": "执行者",
-                              "mode": "normal",
-                              "id": "u:cf62f9bffada",
-                              "multiple": false,
-                              "required": true,
-                              "onlyChildren": true,
-                              "searchable": true,
-                              "onlyLeaf": true,
-                              "size": "lg",
-                              "source": {
-                                "url": "/api/admin/upms/sysUser/getFollowerList",
-                                "method": "get",
-                                "messages": {
-                                },
-                                "adaptor": "",
-                                "dataType": "json"
-                              },
-                              "labelField": "label",
-                              "valueField": "value",
-                              "clearable": true,
-                              "placeholder": "请选择执行者",
-                              "hideNodePathLabel": true
                             }
                           ],
                           "initApi": {
@@ -2125,7 +2496,8 @@
                                 },
                                 {
                                   "componentId": "u:48118c859ba3",
-                                  "actionType": "hidden"
+                                  "actionType": "cancel",
+                                  "groupType": "component"
                                 }
                               ]
                             }
