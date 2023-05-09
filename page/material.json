@@ -1,0 +1,317 @@
+{
+    "type": "page",
+    "body": [
+      {
+        "type": "crud",
+        "syncLocation": false,
+        "api": {
+          "method": "post",
+          "url": "/api/aio-program/task_material/list?material_type=$material_type&page=$page&page_size=$page_size",
+          "messages": {
+          },
+          "dataType": "json"
+        },
+        "columns": [
+          {
+            "name": "title",
+            "label": "素材标题",
+            "type": "text",
+            "id": "u:89650c95c349",
+            "placeholder": "-",
+            "width": 100,
+            "className": "word-break ",
+            "align": "left"
+          },
+          {
+            "name": "material_type",
+            "label": "素材类型",
+            "type": "text",
+            "id": "u:5083b08e8cce",
+            "placeholder": "-",
+            "width": 100,
+            "className": "word-break "
+          },
+          {
+            "type": "text",
+            "label": "素材内容",
+            "name": "content",
+            "id": "u:5da3bab9b391",
+            "placeholder": "-",
+            "width": "",
+            "className": "word-break "
+          },
+          {
+            "type": "text",
+            "label": "任务id",
+            "name": "task_id",
+            "id": "u:1c9e6d15bb58",
+            "placeholder": "-",
+            "width": 100,
+            "className": "word-break "
+          },
+          {
+            "type": "text",
+            "label": "任务名称",
+            "name": "task_name",
+            "id": "u:8815992cde69",
+            "placeholder": "-",
+            "width": 100,
+            "className": "word-break "
+          },
+          {
+            "type": "text",
+            "label": "执行者",
+            "name": "user_name",
+            "id": "u:8e83f296bf63",
+            "placeholder": "-",
+            "width": 100,
+            "className": "word-break "
+          },
+          {
+            "type": "text",
+            "label": "目标用户",
+            "name": "patient_name",
+            "id": "u:8dcb5d564ca3",
+            "placeholder": "-",
+            "className": "word-break ",
+            "width": 150
+          },
+          {
+            "type": "operation",
+            "label": "操作",
+            "id": "u:a716ff40da76",
+            "placeholder": "-",
+            "width": 150,
+            "buttons": [
+              {
+                "type": "button",
+                "label": "预览",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                      {
+                        "args": {
+                        },
+                        "actionType": "dialog",
+                        "dialog": {
+                          "type": "dialog",
+                          "title": "问卷预览",
+                          "body": [
+                            {
+                              "type": "iframe",
+                              "src": "${content}",
+                              "id": "u:8a1aead7e9d8"
+                            }
+                          ],
+                          "showCloseButton": true,
+                          "showErrorMsg": true,
+                          "showLoading": true,
+                          "id": "u:7989f4984e35"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "id": "u:4328c6295569",
+                "level": "primary",
+                "hiddenOn": "type!=4"
+              },
+              {
+                "type": "button",
+                "label": "分享",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                    ]
+                  }
+                },
+                "id": "u:f32a431a7215",
+                "level": "enhance",
+                "hiddenOn": "type!=4"
+              },
+              {
+                "type": "button",
+                "label": "编辑",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                    ]
+                  }
+                },
+                "id": "u:4a0997494be0",
+                "level": "default",
+                "hiddenOn": "type!=4"
+              }
+            ]
+          }
+        ],
+        "bulkActions": [
+        ],
+        "itemActions": [
+        ],
+        "features": [
+          "filter",
+          "update"
+        ],
+        "filterColumnCount": 3,
+        "id": "u:82fd2c441a0f",
+        "perPageAvailable": [
+          10,
+          20,
+          50
+        ],
+        "messages": {
+        },
+        "filter": {
+          "title": "",
+          "body": [
+            {
+              "type": "input-text",
+              "name": "title",
+              "label": "标题",
+              "id": "u:f2bcf12b0bdf",
+              "mode": "inline",
+              "size": "md",
+              "placeholder": "请输入关键词"
+            },
+            {
+              "type": "input-text",
+              "name": "description",
+              "label": "素材内容",
+              "id": "u:04caed83d901",
+              "mode": "inline",
+              "size": "md",
+              "placeholder": "请输入关键词"
+            },
+            {
+              "type": "input-text",
+              "name": "task_name",
+              "label": "任务名称",
+              "id": "u:e7568ed3b0f1",
+              "mode": "inline",
+              "size": "md",
+              "placeholder": "请输入关键词"
+            },
+            {
+              "type": "input-text",
+              "name": "user_ids",
+              "label": "执行者",
+              "id": "u:0536176ce7cd",
+              "mode": "inline",
+              "size": "md",
+              "placeholder": "请输入关键词"
+            },
+            {
+              "type": "input-text",
+              "name": "patient_ids",
+              "label": "用户",
+              "id": "u:be60e1f16bdb",
+              "mode": "inline",
+              "size": "md",
+              "placeholder": "请输入关键词"
+            },
+            {
+              "type": "button-group-select",
+              "name": "material_type",
+              "label": "类型",
+              "inline": false,
+              "options": [
+                {
+                  "label": "全部",
+                  "value": "全部"
+                },
+                {
+                  "label": "富文本",
+                  "value": 2
+                },
+                {
+                  "label": "纯文本",
+                  "value": 1
+                },
+                {
+                  "label": "链接",
+                  "value": 3
+                },
+                {
+                  "label": "问卷",
+                  "value": 4
+                }
+              ],
+              "id": "u:46bedb90b7e6",
+              "multiple": false,
+              "value": "全部"
+            }
+          ],
+          "id": "u:0544ba7d1ee8",
+          "actions": [
+            {
+              "type": "button",
+              "label": "查询",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "componentId": "u:0544ba7d1ee8",
+                      "args": {
+                      },
+                      "actionType": "submit"
+                    }
+                  ]
+                }
+              },
+              "id": "u:37ec07e5a8d6",
+              "level": "primary"
+            },
+            {
+              "type": "button",
+              "label": "重置",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "componentId": "u:0544ba7d1ee8",
+                      "args": {
+                      },
+                      "actionType": "reset"
+                    }
+                  ]
+                }
+              },
+              "id": "u:41ed8f2263eb"
+            }
+          ]
+        },
+        "perPage": 20,
+        "perPageField": "page_size",
+        "footerToolbar": [
+          {
+            "type": "statistics",
+            "align": "left"
+          },
+          {
+            "type": "pagination",
+            "align": "right"
+          },
+          {
+            "type": "switch-per-page",
+            "tpl": "内容",
+            "wrapperComponent": "",
+            "id": "u:9138cd5259bc",
+            "align": "right"
+          }
+        ],
+        "alwaysShowPagination": true
+      }
+    ],
+    "id": "u:fced18697ed4",
+    "pullRefresh": {
+      "disabled": true
+    },
+    "asideResizor": false,
+    "style": {
+      "boxShadow": " 0px 0px 0px 0px transparent"
+    },
+    "regions": [
+      "body"
+    ]
+  }

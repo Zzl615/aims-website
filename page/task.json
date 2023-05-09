@@ -148,7 +148,7 @@
                     "format": "YYYY-MM-DD HH:mm:ss",
                     "minDate": "",
                     "maxDate": "",
-                    "value": "",
+                    "value": "${NOW()}",
                     "mode": "normal",
                     "required": true,
                     "clearValueOnHidden": true
@@ -454,40 +454,15 @@
                     "name": "lib_materials",
                     "label": "素材",
                     "mode": "normal",
-                    "id": "u:81ae9353c86a",
+                    "id": "u:81ae9353c86b",
                     "multiple": true,
                     "joinValues": false,
                     "valueField": "task_material_id",
                     "labelField": "title",
-                    "source": {
-                      "method": "post",
-                      "url": "/api/admin/materialcenter/allMaterial/list",
-                      "messages": {
-                      },
-                      "dataType": "json",
-                      "data": {
-                        "pageParam": {
-                          "pageNum": "${pageNum}",
-                          "pageSize": "${pageSize}"
-                        },
-                        "allMaterialDtoFilter": {
-                          "title": "${title}",
-                          "type": 2,
-                          "materialType": "${materialType}",
-                          "labelIdListString": "${label}"
-                        },
-                        "orderParm": [
-                          {
-                            "fieldName": "createTime",
-                            "asc": 1
-                          }
-                        ]
-                      },
-                      "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
-                    },
                     "size": "lg",
                     "value": "",
                     "pickerSchema": {
+                      "id": "u:4e9cfd2a2de9",
                       "mode": "table",
                       "name": "thelist",
                       "draggable": true,
@@ -498,18 +473,6 @@
                         "target": "thelist",
                         "mode": "inline",
                         "body": [
-                          {
-                            "type": "input-text",
-                            "name": "title",
-                            "addOn": {
-                              "type": "submit",
-                              "label": "搜索",
-                              "level": "primary",
-                              "icon": "fa fa-search pull-left",
-                              "id": "u:4051a516bea0"
-                            },
-                            "id": "u:436a531ae90c"
-                          },
                           {
                             "type": "button-group-select",
                             "name": "materialType",
@@ -531,6 +494,36 @@
                               {
                                 "label": "链接",
                                 "value": 3
+                              }
+                            ],
+                            "id": "u:46bedb90b7e6",
+                            "multiple": false,
+                            "value": 1
+                          },
+                          {
+                            "type": "input-text",
+                            "name": "title",
+                            "addOn": {
+                              "type": "submit",
+                              "label": "搜索",
+                              "level": "primary",
+                              "icon": "fa fa-search pull-left",
+                              "id": "u:4051a516bea0"
+                            },
+                            "id": "u:436a531ae90c"
+                          },
+                          {
+                            "type": "button-group-select",
+                            "name": "type",
+                            "inline": false,
+                            "options": [
+                              {
+                                "label": "企业素材",
+                                "value": 2
+                              },
+                              {
+                                "label": "个人素材",
+                                "value": 1
                               }
                             ],
                             "id": "u:46bedb90b7e6",
@@ -586,6 +579,174 @@
                         {
                           "name": "description",
                           "label": "内容描述",
+                          "type": "text",
+                          "id": "u:b31367aa876d",
+                          "placeholder": "-",
+                          "width": 150,
+                          "className": "word-break ",
+                          "style": {
+                            "-webkit-line-clamp": "2",
+                            "display": "-webkit-box",
+                            "-webkit-box-orient": "vertical",
+                            "text-overflow": "inherit",
+                            "overflow": "hidden",
+                            "text-align": "center",
+                            "padding": "2px",
+                            "position": "absolute",
+                            "top": "50%",
+                            "transform": "translateY(-50%)"
+                          },
+                          "popOver": false,
+                          "align": "center"
+                        }
+                      ],
+                      "perPage": 20,
+                      "perPageField": "pageSize",
+                      "perPageAvailable": [
+                        10,
+                        20,
+                        50
+                      ],
+                      "messages": {
+                      },
+                      "primaryField": "task_material_id",
+                      "defaultParams": {
+                      },
+                      "pageField": "pageNum"
+                    },
+                    "clearValueOnHidden": true,
+                    "source": {
+                      "method": "post",
+                      "url": "/api/admin/materialcenter/allMaterial/list",
+                      "messages": {
+                      },
+                      "dataType": "json",
+                      "data": {
+                        "pageParam": {
+                          "pageNum": "${pageNum}",
+                          "pageSize": "${pageSize}"
+                        },
+                        "allMaterialDtoFilter": {
+                          "title": "${title}",
+                          "type": "${type}",
+                          "materialType": "${materialType}",
+                          "labelIdListString": "${label}"
+                        },
+                        "orderParm": [
+                          {
+                            "fieldName": "createTime",
+                            "asc": 1
+                          }
+                        ]
+                      },
+                      "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
+                    }
+                  },
+                  {
+                    "type": "picker",
+                    "label": "问卷",
+                    "mode": "normal",
+                    "id": "u:81ae9353c86a",
+                    "name": "questionnaire_dataset",
+                    "multiple": true,
+                    "size": "lg",
+                    "source": {
+                      "url": "https://dev-aio-form.zuoshouyisheng.com/api/surely/surelyform/rest/surveys?sort=-updatedAt&status=3&take=20&skip=0&labelIdListString=",
+                      "method": "get",
+                      "messages": {
+                      },
+                      "data": {
+                        "pageParam": {
+                          "pageNum": "${pageNum}",
+                          "pageSize": "${pageSize}"
+                        },
+                        "allMaterialDtoFilter": {
+                        },
+                        "orderParm": [
+                          {
+                            "fieldName": "createTime",
+                            "asc": 1
+                          }
+                        ]
+                      },
+                      "adaptor": "console.log(payload);\nconst items = payload.data.list;\nconst total = payload.data.count\n\npayload.data.items = items;\npayload.data.total = total;\nconsole.log(payload);\nreturn payload;\n",
+                      "requestAdaptor": ""
+                    },
+                    "joinValues": false,
+                    "valueField": "publishId",
+                    "labelField": "title",
+                    "value": "",
+                    "pickerSchema": {
+                      "mode": "table",
+                      "name": "thelist",
+                      "draggable": true,
+                      "headerToolbar": {
+                        "wrapWithPanel": false,
+                        "type": "form",
+                        "className": "text-right",
+                        "target": "thelist",
+                        "mode": "inline",
+                        "body": [
+                          {
+                            "type": "input-text",
+                            "name": "title",
+                            "id": "u:436a531ae90c",
+                            "addOn": {
+                              "type": "submit",
+                              "label": "搜索",
+                              "level": "primary",
+                              "icon": "fa fa-search pull-left",
+                              "id": "u:4051a516bea0"
+                            }
+                          }
+                        ],
+                        "id": "u:224d46a01acf"
+                      },
+                      "footerToolbar": [
+                        {
+                          "type": "statistics",
+                          "align": "left"
+                        },
+                        {
+                          "type": "pagination",
+                          "align": "right"
+                        },
+                        {
+                          "type": "switch-per-page",
+                          "tpl": "内容",
+                          "wrapperComponent": "",
+                          "id": "u:9138cd5259bc",
+                          "align": "right"
+                        }
+                      ],
+                      "columns": [
+                        {
+                          "name": "title",
+                          "label": "名称",
+                          "type": "text",
+                          "id": "u:831a9a9c1291",
+                          "placeholder": "-",
+                          "width": 100,
+                          "className": "word-break ",
+                          "align": "left"
+                        },
+                        {
+                          "name": "mode",
+                          "label": "表单类型",
+                          "type": "mapping",
+                          "id": "u:0a0cb7c7f5ae",
+                          "placeholder": "-",
+                          "width": 50,
+                          "className": "word-break ",
+                          "map": {
+                            "1": "经典",
+                            "2": "幻灯片"
+                          },
+                          "align": "left"
+                        },
+                        {
+                          "name": "labelName",
+                          "label": "标签",
                           "type": "text",
                           "id": "u:b31367aa876d",
                           "placeholder": "-",
@@ -1416,21 +1577,215 @@
                         "static": true
                       },
                       {
+                        "type": "picker",
+                        "id": "u:81ae9353c86a",
+                        "name": "task_materials",
+                        "label": "素材",
+                        "mode": "normal",
+                        "multiple": true,
+                        "size": "lg",
+                        "source": {
+                          "url": "/api/admin/materialcenter/allMaterial/list",
+                          "method": "post",
+                          "messages": {
+                          },
+                          "dataType": "json",
+                          "data": {
+                            "pageParam": {
+                              "pageNum": "${pageNum}",
+                              "pageSize": "${pageSize}"
+                            },
+                            "allMaterialDtoFilter": {
+                              "title": "${title}",
+                              "type": "${type}",
+                              "materialType": "${materialType}",
+                              "labelIdListString": "${label}"
+                            },
+                            "orderParm": [
+                              {
+                                "fieldName": "createTime",
+                                "asc": 1
+                              }
+                            ]
+                          },
+                          "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
+                        },
+                        "labelField": "title",
+                        "valueField": "task_material_id",
+                        "joinValues": false,
+                        "value": "",
+                        "pickerSchema": {
+                          "mode": "table",
+                          "name": "thelist",
+                          "draggable": true,
+                          "headerToolbar": {
+                            "wrapWithPanel": false,
+                            "type": "form",
+                            "className": "text-right",
+                            "target": "thelist",
+                            "mode": "inline",
+                            "body": [
+                              {
+                                "type": "button-group-select",
+                                "name": "materialType",
+                                "id": "u:46bedb90b7e6",
+                                "label": "类型",
+                                "inline": false,
+                                "options": [
+                                  {
+                                    "label": "全部",
+                                    "value": 0
+                                  },
+                                  {
+                                    "label": "富文本",
+                                    "value": 2
+                                  },
+                                  {
+                                    "label": "纯文本",
+                                    "value": 1
+                                  },
+                                  {
+                                    "label": "链接",
+                                    "value": 3
+                                  }
+                                ],
+                                "multiple": false,
+                                "value": 1
+                              },
+                              {
+                                "type": "input-text",
+                                "name": "title",
+                                "id": "u:436a531ae90c",
+                                "addOn": {
+                                  "type": "submit",
+                                  "label": "搜索",
+                                  "level": "primary",
+                                  "icon": "fa fa-search pull-left",
+                                  "id": "u:4051a516bea0"
+                                }
+                              },
+                              {
+                                "type": "button-group-select",
+                                "name": "type",
+                                "inline": false,
+                                "options": [
+                                  {
+                                    "label": "企业素材",
+                                    "value": 2
+                                  },
+                                  {
+                                    "label": "个人素材",
+                                    "value": 1
+                                  }
+                                ],
+                                "id": "u:46bedb90b7e6",
+                                "multiple": false,
+                                "value": 1
+                              }
+                            ],
+                            "id": "u:224d46a01acf"
+                          },
+                          "footerToolbar": [
+                            {
+                              "type": "statistics",
+                              "align": "left"
+                            },
+                            {
+                              "type": "pagination",
+                              "align": "right"
+                            },
+                            {
+                              "type": "switch-per-page",
+                              "tpl": "内容",
+                              "wrapperComponent": "",
+                              "id": "u:9138cd5259bc",
+                              "align": "right"
+                            }
+                          ],
+                          "columns": [
+                            {
+                              "name": "title",
+                              "label": "标题",
+                              "type": "text",
+                              "id": "u:831a9a9c1291",
+                              "placeholder": "-",
+                              "width": 100,
+                              "className": "word-break ",
+                              "align": "left"
+                            },
+                            {
+                              "name": "materialType",
+                              "label": "类型",
+                              "type": "mapping",
+                              "id": "u:0a0cb7c7f5ae",
+                              "placeholder": "-",
+                              "width": 50,
+                              "className": "word-break ",
+                              "map": {
+                                "1": "纯文本",
+                                "2": "富文本",
+                                "3": "链接"
+                              },
+                              "align": "left"
+                            },
+                            {
+                              "name": "description",
+                              "label": "内容描述",
+                              "type": "text",
+                              "id": "u:b31367aa876d",
+                              "placeholder": "-",
+                              "width": 150,
+                              "className": "word-break ",
+                              "style": {
+                                "-webkit-line-clamp": "2",
+                                "display": "-webkit-box",
+                                "-webkit-box-orient": "vertical",
+                                "text-overflow": "inherit",
+                                "overflow": "hidden",
+                                "text-align": "center",
+                                "padding": "2px",
+                                "position": "absolute",
+                                "top": "50%",
+                                "transform": "translateY(-50%)"
+                              },
+                              "popOver": false,
+                              "align": "center"
+                            }
+                          ],
+                          "id": "u:4e9cfd2a2de9",
+                          "perPage": 20,
+                          "perPageField": "pageSize",
+                          "perPageAvailable": [
+                            10,
+                            20,
+                            50
+                          ],
+                          "messages": {
+                          },
+                          "primaryField": "task_material_id",
+                          "defaultParams": {
+                          },
+                          "pageField": "pageNum"
+                        },
+                        "clearValueOnHidden": true,
+                        "disabled": true
+                      },
+                      {
                         "type": "input-text",
-                        "id": "u:8dfadf06e6ae",
-                        "disabled": false,
-                        "static": true,
                         "name": "task_due_time",
+                        "disabled": false,
                         "label": "任务完成时间",
-                        "mode": "normal"
+                        "mode": "normal",
+                        "id": "u:8dfadf06e6ae",
+                        "static": true
                       },
                       {
                         "type": "input-text",
                         "name": "completion_conditions_title",
-                        "disabled": false,
                         "label": "任务完成条件",
                         "mode": "normal",
                         "id": "u:8dfadf06e6ae",
+                        "disabled": false,
                         "static": true
                       },
                       {
@@ -1485,7 +1840,20 @@
                         "id": "u:8dfadf192e6ae",
                         "static": true
                       }
-                    ]
+                    ],
+                    "initApi": {
+                      "method": "get",
+                      "url": "/api/aio-program/individual_task/$task_id/detail",
+                      "messages": {
+                      },
+                      "replaceData": true
+                    },
+                    "messages": {
+                      "fetchFailed": "初始化失败",
+                      "saveSuccess": "保存成功",
+                      "saveFailed": "保存失败",
+                      "fetchSuccess": ""
+                    }
                   }
                 ],
                 "id": "u:e6b054986dc7",
@@ -1631,6 +1999,199 @@
                               "minRows": 3,
                               "maxRows": 20,
                               "required": true
+                            },
+                            {
+                              "type": "picker",
+                              "label": "素材",
+                              "mode": "normal",
+                              "id": "u:81ae9353c86a",
+                              "name": "task_materials",
+                              "multiple": true,
+                              "size": "lg",
+                              "source": {
+                                "url": "/api/admin/materialcenter/allMaterial/list",
+                                "method": "post",
+                                "messages": {
+                                },
+                                "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n",
+                                "dataType": "json",
+                                "data": {
+                                  "pageParam": {
+                                    "pageNum": "${pageNum}",
+                                    "pageSize": "${pageSize}"
+                                  },
+                                  "allMaterialDtoFilter": {
+                                    "title": "${title}",
+                                    "type": "${type}",
+                                    "materialType": "${materialType}",
+                                    "labelIdListString": "${label}"
+                                  },
+                                  "orderParm": [
+                                    {
+                                      "fieldName": "createTime",
+                                      "asc": 1
+                                    }
+                                  ]
+                                }
+                              },
+                              "labelField": "title",
+                              "valueField": "task_material_id",
+                              "joinValues": false,
+                              "value": "",
+                              "pickerSchema": {
+                                "mode": "table",
+                                "name": "thelist",
+                                "draggable": true,
+                                "headerToolbar": {
+                                  "wrapWithPanel": false,
+                                  "type": "form",
+                                  "className": "text-right",
+                                  "target": "thelist",
+                                  "mode": "inline",
+                                  "body": [
+                                    {
+                                      "type": "button-group-select",
+                                      "name": "materialType",
+                                      "id": "u:46bedb90b7e6",
+                                      "label": "类型",
+                                      "inline": false,
+                                      "options": [
+                                        {
+                                          "label": "全部",
+                                          "value": 0
+                                        },
+                                        {
+                                          "label": "富文本",
+                                          "value": 2
+                                        },
+                                        {
+                                          "label": "纯文本",
+                                          "value": 1
+                                        },
+                                        {
+                                          "label": "链接",
+                                          "value": 3
+                                        }
+                                      ],
+                                      "multiple": false,
+                                      "value": 1
+                                    },
+                                    {
+                                      "type": "input-text",
+                                      "name": "title",
+                                      "id": "u:436a531ae90c",
+                                      "addOn": {
+                                        "type": "submit",
+                                        "label": "搜索",
+                                        "level": "primary",
+                                        "icon": "fa fa-search pull-left",
+                                        "id": "u:4051a516bea0"
+                                      }
+                                    },
+                                    {
+                                      "type": "button-group-select",
+                                      "name": "type",
+                                      "inline": false,
+                                      "options": [
+                                        {
+                                          "label": "企业素材",
+                                          "value": 2
+                                        },
+                                        {
+                                          "label": "个人素材",
+                                          "value": 1
+                                        }
+                                      ],
+                                      "id": "u:46bedb90b7e6",
+                                      "multiple": false,
+                                      "value": 1
+                                    }
+                                  ],
+                                  "id": "u:224d46a01acf"
+                                },
+                                "footerToolbar": [
+                                  {
+                                    "type": "statistics",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "type": "pagination",
+                                    "align": "right"
+                                  },
+                                  {
+                                    "type": "switch-per-page",
+                                    "tpl": "内容",
+                                    "wrapperComponent": "",
+                                    "id": "u:9138cd5259bc",
+                                    "align": "right"
+                                  }
+                                ],
+                                "columns": [
+                                  {
+                                    "name": "title",
+                                    "label": "标题",
+                                    "type": "text",
+                                    "id": "u:831a9a9c1291",
+                                    "placeholder": "-",
+                                    "width": 100,
+                                    "className": "word-break ",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "materialType",
+                                    "label": "类型",
+                                    "type": "mapping",
+                                    "id": "u:0a0cb7c7f5ae",
+                                    "placeholder": "-",
+                                    "width": 50,
+                                    "className": "word-break ",
+                                    "map": {
+                                      "1": "纯文本",
+                                      "2": "富文本",
+                                      "3": "链接"
+                                    },
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "description",
+                                    "label": "内容描述",
+                                    "type": "text",
+                                    "id": "u:b31367aa876d",
+                                    "placeholder": "-",
+                                    "width": 150,
+                                    "className": "word-break ",
+                                    "style": {
+                                      "-webkit-line-clamp": "2",
+                                      "display": "-webkit-box",
+                                      "-webkit-box-orient": "vertical",
+                                      "text-overflow": "inherit",
+                                      "overflow": "hidden",
+                                      "text-align": "center",
+                                      "padding": "2px",
+                                      "position": "absolute",
+                                      "top": "50%",
+                                      "transform": "translateY(-50%)"
+                                    },
+                                    "popOver": false,
+                                    "align": "center"
+                                  }
+                                ],
+                                "id": "u:4e9cfd2a2de9",
+                                "perPage": 20,
+                                "perPageField": "pageSize",
+                                "perPageAvailable": [
+                                  10,
+                                  20,
+                                  50
+                                ],
+                                "messages": {
+                                },
+                                "primaryField": "task_material_id",
+                                "defaultParams": {
+                                },
+                                "pageField": "pageNum"
+                              },
+                              "clearValueOnHidden": true
                             },
                             {
                               "type": "nested-select",
@@ -1856,6 +2417,13 @@
                                 }
                               ]
                             }
+                          },
+                          "initApi": {
+                            "method": "get",
+                            "url": "/api/aio-program/individual_task/$task_id/detail",
+                            "messages": {
+                            },
+                            "replaceData": true
                           }
                         }
                       ],
@@ -2263,6 +2831,199 @@
                               "required": true,
                               "minRows": 3,
                               "maxRows": 20
+                            },
+                            {
+                              "type": "picker",
+                              "label": "素材",
+                              "mode": "normal",
+                              "id": "u:81ae9353c86a",
+                              "name": "task_materials",
+                              "multiple": true,
+                              "size": "lg",
+                              "source": {
+                                "url": "/api/admin/materialcenter/allMaterial/list",
+                                "method": "post",
+                                "messages": {
+                                },
+                                "dataType": "json",
+                                "data": {
+                                  "pageParam": {
+                                    "pageNum": "${pageNum}",
+                                    "pageSize": "${pageSize}"
+                                  },
+                                  "allMaterialDtoFilter": {
+                                    "title": "${title}",
+                                    "type": "${type}",
+                                    "materialType": "${materialType}",
+                                    "labelIdListString": "${label}"
+                                  },
+                                  "orderParm": [
+                                    {
+                                      "fieldName": "createTime",
+                                      "asc": 1
+                                    }
+                                  ]
+                                },
+                                "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
+                              },
+                              "labelField": "title",
+                              "valueField": "task_material_id",
+                              "joinValues": false,
+                              "value": "",
+                              "pickerSchema": {
+                                "mode": "table",
+                                "name": "thelist",
+                                "draggable": true,
+                                "headerToolbar": {
+                                  "wrapWithPanel": false,
+                                  "type": "form",
+                                  "className": "text-right",
+                                  "target": "thelist",
+                                  "mode": "inline",
+                                  "body": [
+                                    {
+                                      "type": "button-group-select",
+                                      "name": "materialType",
+                                      "id": "u:46bedb90b7e6",
+                                      "label": "类型",
+                                      "inline": false,
+                                      "options": [
+                                        {
+                                          "label": "全部",
+                                          "value": 0
+                                        },
+                                        {
+                                          "label": "富文本",
+                                          "value": 2
+                                        },
+                                        {
+                                          "label": "纯文本",
+                                          "value": 1
+                                        },
+                                        {
+                                          "label": "链接",
+                                          "value": 3
+                                        }
+                                      ],
+                                      "multiple": false,
+                                      "value": 1
+                                    },
+                                    {
+                                      "type": "input-text",
+                                      "name": "title",
+                                      "id": "u:436a531ae90c",
+                                      "addOn": {
+                                        "type": "submit",
+                                        "label": "搜索",
+                                        "level": "primary",
+                                        "icon": "fa fa-search pull-left",
+                                        "id": "u:4051a516bea0"
+                                      }
+                                    },
+                                    {
+                                      "type": "button-group-select",
+                                      "name": "type",
+                                      "inline": false,
+                                      "options": [
+                                        {
+                                          "label": "企业素材",
+                                          "value": 2
+                                        },
+                                        {
+                                          "label": "个人素材",
+                                          "value": 1
+                                        }
+                                      ],
+                                      "id": "u:46bedb90b7e6",
+                                      "multiple": false,
+                                      "value": 1
+                                    }
+                                  ],
+                                  "id": "u:224d46a01acf"
+                                },
+                                "footerToolbar": [
+                                  {
+                                    "type": "statistics",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "type": "pagination",
+                                    "align": "right"
+                                  },
+                                  {
+                                    "type": "switch-per-page",
+                                    "tpl": "内容",
+                                    "wrapperComponent": "",
+                                    "id": "u:9138cd5259bc",
+                                    "align": "right"
+                                  }
+                                ],
+                                "columns": [
+                                  {
+                                    "name": "title",
+                                    "label": "标题",
+                                    "type": "text",
+                                    "id": "u:831a9a9c1291",
+                                    "placeholder": "-",
+                                    "width": 100,
+                                    "className": "word-break ",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "materialType",
+                                    "label": "类型",
+                                    "type": "mapping",
+                                    "id": "u:0a0cb7c7f5ae",
+                                    "placeholder": "-",
+                                    "width": 50,
+                                    "className": "word-break ",
+                                    "map": {
+                                      "1": "纯文本",
+                                      "2": "富文本",
+                                      "3": "链接"
+                                    },
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "description",
+                                    "label": "内容描述",
+                                    "type": "text",
+                                    "id": "u:b31367aa876d",
+                                    "placeholder": "-",
+                                    "width": 150,
+                                    "className": "word-break ",
+                                    "style": {
+                                      "-webkit-line-clamp": "2",
+                                      "display": "-webkit-box",
+                                      "-webkit-box-orient": "vertical",
+                                      "text-overflow": "inherit",
+                                      "overflow": "hidden",
+                                      "text-align": "center",
+                                      "padding": "2px",
+                                      "position": "absolute",
+                                      "top": "50%",
+                                      "transform": "translateY(-50%)"
+                                    },
+                                    "popOver": false,
+                                    "align": "center"
+                                  }
+                                ],
+                                "id": "u:4e9cfd2a2de9",
+                                "perPage": 20,
+                                "perPageField": "pageSize",
+                                "perPageAvailable": [
+                                  10,
+                                  20,
+                                  50
+                                ],
+                                "messages": {
+                                },
+                                "primaryField": "task_material_id",
+                                "defaultParams": {
+                                },
+                                "pageField": "pageNum"
+                              },
+                              "clearValueOnHidden": true
                             },
                             {
                               "type": "nested-select",
