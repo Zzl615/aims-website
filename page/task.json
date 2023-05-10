@@ -655,20 +655,6 @@
                       "method": "get",
                       "messages": {
                       },
-                      "data": {
-                        "pageParam": {
-                          "pageNum": "${pageNum}",
-                          "pageSize": "${pageSize}"
-                        },
-                        "allMaterialDtoFilter": {
-                        },
-                        "orderParm": [
-                          {
-                            "fieldName": "createTime",
-                            "asc": 1
-                          }
-                        ]
-                      },
                       "adaptor": "console.log(payload);\nconst items = payload.data.list;\nconst total = payload.data.count\n\npayload.data.items = items;\npayload.data.total = total;\nconsole.log(payload);\nreturn payload;\n",
                       "requestAdaptor": ""
                     },
@@ -688,8 +674,31 @@
                         "mode": "inline",
                         "body": [
                           {
+                            "type": "select",
+                            "name": "status",
+                            "id": "u:6fffcd8304f2",
+                            "options": [
+                              {
+                                "label": "未开始",
+                                "value": 2
+                              },
+                              {
+                                "label": "进行中",
+                                "value": 3
+                              },
+                              {
+                                "label": "已完成",
+                                "value": 4
+                              }
+                            ],
+                            "multiple": false,
+                            "mode": "inline",
+                            "size": "lg",
+                            "value": 3
+                          },
+                          {
                             "type": "input-text",
-                            "name": "title",
+                            "name": "keyword",
                             "id": "u:436a531ae90c",
                             "addOn": {
                               "type": "submit",
@@ -697,7 +706,9 @@
                               "level": "primary",
                               "icon": "fa fa-search pull-left",
                               "id": "u:4051a516bea0"
-                            }
+                            },
+                            "size": "lg",
+                            "placeholder": "搜索问卷名称"
                           }
                         ],
                         "id": "u:224d46a01acf"
@@ -1610,7 +1621,7 @@
                           },
                           "adaptor": "console.log(payload);\nconst items = payload.data.items;\n\nconst newitems = [];\n\nfor (const e of items) {\n    if (e.materialType === '1') {\n        e.description = e.content;\n    }\n    newitems.push(e);\n}\n\npayload.data.items = items;\nconsole.log(payload);\nreturn payload;\n"
                         },
-                        "labelField": "title",
+                        "labelField": "task_material_id",
                         "valueField": "task_material_id",
                         "joinValues": false,
                         "value": "",
@@ -2987,6 +2998,160 @@
                                   {
                                     "name": "description",
                                     "label": "内容描述",
+                                    "type": "text",
+                                    "id": "u:b31367aa876d",
+                                    "placeholder": "-",
+                                    "width": 150,
+                                    "className": "word-break ",
+                                    "style": {
+                                      "-webkit-line-clamp": "2",
+                                      "display": "-webkit-box",
+                                      "-webkit-box-orient": "vertical",
+                                      "text-overflow": "inherit",
+                                      "overflow": "hidden",
+                                      "text-align": "center",
+                                      "padding": "2px",
+                                      "position": "absolute",
+                                      "top": "50%",
+                                      "transform": "translateY(-50%)"
+                                    },
+                                    "popOver": false,
+                                    "align": "center"
+                                  }
+                                ],
+                                "id": "u:4e9cfd2a2de9",
+                                "perPage": 20,
+                                "perPageField": "pageSize",
+                                "perPageAvailable": [
+                                  10,
+                                  20,
+                                  50
+                                ],
+                                "messages": {
+                                },
+                                "primaryField": "task_material_id",
+                                "defaultParams": {
+                                },
+                                "pageField": "pageNum"
+                              },
+                              "clearValueOnHidden": true
+                            },
+                            {
+                              "type": "picker",
+                              "label": "问卷",
+                              "mode": "normal",
+                              "id": "u:81ae9353c86a",
+                              "name": "questionnaire_dataset",
+                              "multiple": true,
+                              "size": "lg",
+                              "source": {
+                                "url": "https://dev-aio-form.zuoshouyisheng.com/api/surely/surelyform/rest/surveys?sort=-updatedAt&status=3&take=20&skip=0&labelIdListString=",
+                                "method": "get",
+                                "messages": {
+                                },
+                                "adaptor": "console.log(payload);\nconst items = payload.data.list;\nconst total = payload.data.count\n\npayload.data.items = items;\npayload.data.total = total;\nconsole.log(payload);\nreturn payload;\n",
+                                "requestAdaptor": ""
+                              },
+                              "labelField": "title",
+                              "valueField": "publishId",
+                              "joinValues": false,
+                              "value": "",
+                              "pickerSchema": {
+                                "mode": "table",
+                                "name": "thelist",
+                                "draggable": true,
+                                "headerToolbar": {
+                                  "wrapWithPanel": false,
+                                  "type": "form",
+                                  "className": "text-right",
+                                  "target": "thelist",
+                                  "mode": "inline",
+                                  "body": [
+                                    {
+                                      "type": "select",
+                                      "name": "status",
+                                      "id": "u:6fffcd8304f2",
+                                      "options": [
+                                        {
+                                          "label": "未开始",
+                                          "value": 2
+                                        },
+                                        {
+                                          "label": "进行中",
+                                          "value": 3
+                                        },
+                                        {
+                                          "label": "已完成",
+                                          "value": 4
+                                        }
+                                      ],
+                                      "multiple": false,
+                                      "mode": "inline",
+                                      "size": "lg",
+                                      "value": 3
+                                    },
+                                    {
+                                      "type": "input-text",
+                                      "name": "keyword",
+                                      "id": "u:436a531ae90c",
+                                      "addOn": {
+                                        "type": "submit",
+                                        "label": "搜索",
+                                        "level": "primary",
+                                        "icon": "fa fa-search pull-left",
+                                        "id": "u:4051a516bea0"
+                                      },
+                                      "size": "lg",
+                                      "placeholder": "搜索问卷名称"
+                                    }
+                                  ],
+                                  "id": "u:224d46a01acf"
+                                },
+                                "footerToolbar": [
+                                  {
+                                    "type": "statistics",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "type": "pagination",
+                                    "align": "right"
+                                  },
+                                  {
+                                    "type": "switch-per-page",
+                                    "tpl": "内容",
+                                    "wrapperComponent": "",
+                                    "id": "u:9138cd5259bc",
+                                    "align": "right"
+                                  }
+                                ],
+                                "columns": [
+                                  {
+                                    "name": "title",
+                                    "label": "名称",
+                                    "type": "text",
+                                    "id": "u:831a9a9c1291",
+                                    "placeholder": "-",
+                                    "width": 100,
+                                    "className": "word-break ",
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "mode",
+                                    "label": "表单类型",
+                                    "type": "mapping",
+                                    "id": "u:0a0cb7c7f5ae",
+                                    "placeholder": "-",
+                                    "width": 50,
+                                    "className": "word-break ",
+                                    "map": {
+                                      "1": "经典",
+                                      "2": "幻灯片"
+                                    },
+                                    "align": "left"
+                                  },
+                                  {
+                                    "name": "labelName",
+                                    "label": "标签",
                                     "type": "text",
                                     "id": "u:b31367aa876d",
                                     "placeholder": "-",
