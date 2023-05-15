@@ -1,317 +1,1467 @@
 {
-    "type": "page",
-    "body": [
-      {
-        "type": "crud",
-        "syncLocation": false,
-        "api": {
-          "method": "post",
-          "url": "/api/aio-program/task_material/list?material_type=$material_type&page=$page&page_size=$page_size",
-          "messages": {
-          },
-          "dataType": "json"
-        },
-        "columns": [
-          {
-            "name": "title",
-            "label": "素材标题",
-            "type": "text",
-            "id": "u:89650c95c349",
-            "placeholder": "-",
-            "width": 100,
-            "className": "word-break ",
-            "align": "left"
-          },
-          {
-            "name": "material_type",
-            "label": "素材类型",
-            "type": "text",
-            "id": "u:5083b08e8cce",
-            "placeholder": "-",
-            "width": 100,
-            "className": "word-break "
-          },
-          {
-            "type": "text",
-            "label": "素材内容",
-            "name": "content",
-            "id": "u:5da3bab9b391",
-            "placeholder": "-",
-            "width": "",
-            "className": "word-break "
-          },
-          {
-            "type": "text",
-            "label": "任务id",
-            "name": "task_id",
-            "id": "u:1c9e6d15bb58",
-            "placeholder": "-",
-            "width": 100,
-            "className": "word-break "
-          },
-          {
-            "type": "text",
-            "label": "任务名称",
-            "name": "task_name",
-            "id": "u:8815992cde69",
-            "placeholder": "-",
-            "width": 100,
-            "className": "word-break "
-          },
-          {
-            "type": "text",
-            "label": "执行者",
-            "name": "user_name",
-            "id": "u:8e83f296bf63",
-            "placeholder": "-",
-            "width": 100,
-            "className": "word-break "
-          },
-          {
-            "type": "text",
-            "label": "目标用户",
-            "name": "patient_name",
-            "id": "u:8dcb5d564ca3",
-            "placeholder": "-",
-            "className": "word-break ",
-            "width": 150
-          },
-          {
-            "type": "operation",
-            "label": "操作",
-            "id": "u:a716ff40da76",
-            "placeholder": "-",
-            "width": 150,
-            "buttons": [
-              {
-                "type": "button",
-                "label": "预览",
-                "onEvent": {
-                  "click": {
-                    "actions": [
-                      {
-                        "args": {
-                        },
-                        "actionType": "dialog",
-                        "dialog": {
-                          "type": "dialog",
-                          "title": "问卷预览",
-                          "body": [
-                            {
-                              "type": "iframe",
-                              "src": "${content}",
-                              "id": "u:8a1aead7e9d8"
-                            }
-                          ],
-                          "showCloseButton": true,
-                          "showErrorMsg": true,
-                          "showLoading": true,
-                          "id": "u:7989f4984e35"
-                        }
-                      }
-                    ]
-                  }
-                },
-                "id": "u:4328c6295569",
-                "level": "primary",
-                "hiddenOn": "type!=4"
-              },
-              {
-                "type": "button",
-                "label": "分享",
-                "onEvent": {
-                  "click": {
-                    "actions": [
-                    ]
-                  }
-                },
-                "id": "u:f32a431a7215",
-                "level": "enhance",
-                "hiddenOn": "type!=4"
-              },
-              {
-                "type": "button",
-                "label": "编辑",
-                "onEvent": {
-                  "click": {
-                    "actions": [
-                    ]
-                  }
-                },
-                "id": "u:4a0997494be0",
-                "level": "default",
-                "hiddenOn": "type!=4"
-              }
-            ]
-          }
-        ],
-        "bulkActions": [
-        ],
-        "itemActions": [
-        ],
-        "features": [
-          "filter",
-          "update"
-        ],
-        "filterColumnCount": 3,
-        "id": "u:82fd2c441a0f",
-        "perPageAvailable": [
-          10,
-          20,
-          50
-        ],
+  "type": "page",
+  "body": [
+    {
+      "type": "crud",
+      "id": "u:82fd2c441a0f",
+      "syncLocation": false,
+      "api": {
+        "method": "post",
+        "url": "/api/aio-program/task_material/list?material_type=$material_type&page=$page&page_size=$page_size",
         "messages": {
         },
-        "filter": {
-          "title": "",
-          "body": [
-            {
-              "type": "input-text",
-              "name": "title",
-              "label": "标题",
-              "id": "u:f2bcf12b0bdf",
-              "mode": "inline",
-              "size": "md",
-              "placeholder": "请输入关键词"
-            },
-            {
-              "type": "input-text",
-              "name": "description",
-              "label": "素材内容",
-              "id": "u:04caed83d901",
-              "mode": "inline",
-              "size": "md",
-              "placeholder": "请输入关键词"
-            },
-            {
-              "type": "input-text",
-              "name": "task_name",
-              "label": "任务名称",
-              "id": "u:e7568ed3b0f1",
-              "mode": "inline",
-              "size": "md",
-              "placeholder": "请输入关键词"
-            },
-            {
-              "type": "input-text",
-              "name": "user_ids",
-              "label": "执行者",
-              "id": "u:0536176ce7cd",
-              "mode": "inline",
-              "size": "md",
-              "placeholder": "请输入关键词"
-            },
-            {
-              "type": "input-text",
-              "name": "patient_ids",
-              "label": "用户",
-              "id": "u:be60e1f16bdb",
-              "mode": "inline",
-              "size": "md",
-              "placeholder": "请输入关键词"
-            },
-            {
-              "type": "button-group-select",
-              "name": "material_type",
-              "label": "类型",
-              "inline": false,
-              "options": [
-                {
-                  "label": "全部",
-                  "value": "全部"
-                },
-                {
-                  "label": "富文本",
-                  "value": 2
-                },
-                {
-                  "label": "纯文本",
-                  "value": 1
-                },
-                {
-                  "label": "链接",
-                  "value": 3
-                },
-                {
-                  "label": "问卷",
-                  "value": 4
-                }
-              ],
-              "id": "u:46bedb90b7e6",
-              "multiple": false,
-              "value": "全部"
-            }
-          ],
-          "id": "u:0544ba7d1ee8",
-          "actions": [
+        "dataType": "json",
+        "requestAdaptor": "if (api.data.material_type == '全部') delete api.data.material_type;\nif (api.data.user_ids === '') delete api.data.user_ids\nif (api.data.patient_ids == '') delete api.data.patient_ids \nreturn api;",
+        "adaptor": "",
+        "data": {
+          "title": "${title_1}",
+          "material_type": "${material_type}",
+          "task_name": "${task_name_1}",
+          "description": "${description_1}",
+          "user_ids": "$executor_ids",
+          "patient_ids": "${patient_ids}"
+        }
+      },
+      "columns": [
+        {
+          "name": "title",
+          "label": "素材标题",
+          "type": "text",
+          "id": "u:89650c95c349",
+          "placeholder": "-",
+          "width": 100,
+          "className": "word-break ",
+          "align": "left"
+        },
+        {
+          "name": "material_type",
+          "label": "素材类型",
+          "type": "map",
+          "id": "u:5083b08e8cce",
+          "placeholder": "-",
+          "width": 100,
+          "className": "word-break ",
+          "mapping": {
+            "1": "纯文本",
+            "2": "富文本",
+            "3": "链接",
+            "4": "问卷"
+          },
+          "map": {
+            "1": "纯文本",
+            "2": "富文本",
+            "3": "链接",
+            "4": "问卷"
+          }
+        },
+        {
+          "type": "text",
+          "label": "内容描述",
+          "name": "description",
+          "id": "u:5da3bab9b391",
+          "placeholder": "-",
+          "width": "",
+          "className": "",
+          "toggled": true,
+          "inline": true,
+          "hidden": false,
+          "sortable": false
+        },
+        {
+          "type": "text",
+          "label": "任务id",
+          "name": "task_id",
+          "id": "u:1c9e6d15bb58",
+          "placeholder": "-",
+          "width": 100,
+          "className": "word-break "
+        },
+        {
+          "type": "text",
+          "label": "任务名称",
+          "name": "task_name",
+          "id": "u:8815992cde69",
+          "placeholder": "-",
+          "width": 100,
+          "className": "word-break "
+        },
+        {
+          "type": "text",
+          "label": "执行者",
+          "name": "user_name",
+          "id": "u:8e83f296bf63",
+          "placeholder": "-",
+          "width": 100,
+          "className": "word-break "
+        },
+        {
+          "type": "text",
+          "label": "目标用户",
+          "name": "patient_name",
+          "id": "u:8dcb5d564ca3",
+          "placeholder": "-",
+          "className": "word-break ",
+          "width": 150
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "id": "u:a716ff40da76",
+          "placeholder": "-",
+          "width": 240,
+          "buttons": [
             {
               "type": "button",
-              "label": "查询",
+              "label": "预览",
               "onEvent": {
                 "click": {
                   "actions": [
                     {
-                      "componentId": "u:0544ba7d1ee8",
-                      "args": {
-                      },
-                      "actionType": "submit"
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "预览",
+                        "body": [
+                          {
+                            "type": "form",
+                            "body": [
+                            ],
+                            "id": "u:5cb9dcbb20f9"
+                          },
+                          {
+                            "type": "tpl",
+                            "tpl": "${content}",
+                            "inline": true,
+                            "wrapperComponent": "",
+                            "id": "u:7b64d7523529"
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "id": "u:be0965cab2ad",
+                        "actions": [
+                        ],
+                        "closeOnEsc": false,
+                        "initApi": {
+                          "url": "/api/aio-program/task_plain_text_materials/$task_material_id",
+                          "method": "get",
+                          "requestAdaptor": "",
+                          "adaptor": "",
+                          "messages": {
+                          },
+                          "replaceData": true
+                        }
+                      }
                     }
                   ]
                 }
               },
-              "id": "u:37ec07e5a8d6",
-              "level": "primary"
+              "id": "u:4328c6295569",
+              "level": "primary",
+              "hiddenOn": "${material_type!=1}"
             },
             {
               "type": "button",
-              "label": "重置",
+              "label": "预览",
               "onEvent": {
                 "click": {
                   "actions": [
                     {
-                      "componentId": "u:0544ba7d1ee8",
-                      "args": {
-                      },
-                      "actionType": "reset"
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "预览",
+                        "body": [
+                          {
+                            "type": "service",
+                            "id": "u:10f006f29458",
+                            "body": [
+                              {
+                                "type": "html",
+                                "id": "u:b531e931eba6",
+                                "inline": true,
+                                "wrapperComponent": "",
+                                "html": "${content|raw}"
+                              }
+                            ],
+                            "style": {
+                              "boxShadow": " 0px 0px 0px 0px transparent"
+                            },
+                            "pullRefresh": {
+                              "disabled": false
+                            },
+                            "asideResizor": false,
+                            "regions": [
+                              "body"
+                            ],
+                            "api": {
+                              "url": "/api/aio-program/task_rich_text_materials/${task_material_id}",
+                              "method": "get",
+                              "messages": {
+                              },
+                              "requestAdaptor": ""
+                            }
+                          }
+                        ],
+                        "id": "u:ba8f77e59225",
+                        "actions": [
+                        ],
+                        "showCloseButton": true
+                      }
                     }
                   ]
                 }
               },
-              "id": "u:41ed8f2263eb"
+              "id": "u:51f393ba3199",
+              "level": "primary",
+              "hiddenOn": "${material_type!=2}"
+            },
+            {
+              "type": "button",
+              "label": "预览",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "预览",
+                        "body": [
+                          {
+                            "type": "container",
+                            "body": [
+                              {
+                                "type": "iframe",
+                                "src": "${content}",
+                                "id": "u:852d68899fd7",
+                                "style": {
+                                  "boxShadow": " 0px 0px 0px 0px transparent"
+                                }
+                              }
+                            ],
+                            "style": {
+                              "position": "static",
+                              "display": "block",
+                              "height": 617,
+                              "overflowY": "auto",
+                              "width": 466,
+                              "overflowX": "auto",
+                              "margin": "0px auto",
+                              "boxShadow": " 0px 0px 0px 0px transparent"
+                            },
+                            "wrapperBody": false,
+                            "isFixedHeight": true,
+                            "isFixedWidth": true,
+                            "id": "u:309a45ca3e92",
+                            "initApi": {
+                              "url": "/api/aio-program/task_link_materials/$task_material_id",
+                              "method": "get",
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "messages": {
+                              },
+                              "replaceData": true
+                            }
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": false,
+                        "size": "md",
+                        "withDefaultData": false,
+                        "dataMapSwitch": false,
+                        "id": "u:1adbc6161214",
+                        "actions": [
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:1b153036bd28",
+              "level": "primary",
+              "hiddenOn": "${material_type!=3}"
+            },
+            {
+              "type": "button",
+              "label": "预览",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "问卷预览",
+                        "body": [
+                          {
+                            "type": "iframe",
+                            "src": "${env.form_address}/survey/${questionnaire_id}/create?third_preview=1",
+                            "id": "u:1f26cd7b05d1",
+                            "style": {
+                              "boxShadow": " 0px 0px 0px 0px transparent",
+                              "height": "70vh"
+                            }
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "id": "u:9e7abcdb6dbb",
+                        "closeOnEsc": false,
+                        "size": "lg",
+                        "actions": [
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:60b136bdc73b",
+              "level": "primary",
+              "hiddenOn": "${material_type!=4}"
+            },
+            {
+              "type": "button",
+              "label": "分享",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "素材分享",
+                        "body": [
+                          {
+                            "type": "panel",
+                            "title": "",
+                            "body": [
+                              {
+                                "type": "tpl",
+                                "tpl": "${content}",
+                                "inline": true,
+                                "wrapperComponent": "",
+                                "id": "u:6d0f9372d345",
+                                "style": {
+                                  "boxShadow": " 0px 0px 0px 0px transparent"
+                                }
+                              }
+                            ],
+                            "id": "u:a72de1089587"
+                          },
+                          {
+                            "type": "container",
+                            "body": [
+                              {
+                                "type": "button",
+                                "label": "复制",
+                                "onEvent": {
+                                  "click": {
+                                    "actions": [
+                                      {
+                                        "args": {
+                                          "copyFormat": "text/plain",
+                                          "content": "${content}"
+                                        },
+                                        "actionType": "copy"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "level": "primary",
+                                "id": "u:170d224e6867"
+                              }
+                            ],
+                            "style": {
+                              "position": "static",
+                              "display": "block",
+                              "textAlign": "right"
+                            },
+                            "wrapperBody": false,
+                            "isFixedHeight": false,
+                            "isFixedWidth": false,
+                            "id": "u:b6af973ea6e0"
+                          }
+                        ],
+                        "closeOnEsc": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "showCloseButton": true,
+                        "actions": [
+                        ],
+                        "id": "u:c12f43c6eb83"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:f32a431a7215",
+              "level": "enhance",
+              "hiddenOn": "${material_type!=1}"
+            },
+            {
+              "type": "button",
+              "label": "分享",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "id": "u:254a4c63b74d",
+                        "type": "dialog",
+                        "title": "素材分享",
+                        "body": [
+                          {
+                            "type": "flex",
+                            "className": "p-1",
+                            "items": [
+                              {
+                                "type": "container",
+                                "body": [
+                                  {
+                                    "type": "qrcode",
+                                    "value": "${window:location.origin}/task_material/richtext/view?task_material_id=${task_material_id}",
+                                    "codeSize": 128,
+                                    "id": "u:15407498268d"
+                                  }
+                                ],
+                                "size": "md",
+                                "style": {
+                                  "position": "static",
+                                  "display": "block",
+                                  "flex": "0 0 auto",
+                                  "boxShadow": " 0px 0px 0px 0px transparent"
+                                },
+                                "wrapperBody": false,
+                                "isFixedHeight": false,
+                                "isFixedWidth": false,
+                                "id": "u:1d62fdb7abca"
+                              },
+                              {
+                                "type": "container",
+                                "body": [
+                                  {
+                                    "type": "steps",
+                                    "value": "0",
+                                    "steps": [
+                                      {
+                                        "title": "",
+                                        "subTitle": "复制链接",
+                                        "description": ""
+                                      },
+                                      {
+                                        "title": "",
+                                        "subTitle": "发送链接至用户"
+                                      }
+                                    ],
+                                    "status": "finish",
+                                    "id": "u:17be66963f23"
+                                  },
+                                  {
+                                    "type": "input-text",
+                                    "label": "",
+                                    "name": "text",
+                                    "id": "u:ac9c2d080ebe",
+                                    "mode": "inline",
+                                    "size": "lg",
+                                    "readOnly": true,
+                                    "value": "${window:location.origin+'/task_material/richtext/view?task_material_id=' + task_material_id}"
+                                  },
+                                  {
+                                    "type": "button",
+                                    "label": "复制链接",
+                                    "onEvent": {
+                                      "click": {
+                                        "actions": [
+                                          {
+                                            "args": {
+                                              "copyFormat": "text/plain",
+                                              "content": "${window:location.origin}/task_material/richtext/view?task_material_id=${task_material_id}"
+                                            },
+                                            "actionType": "copy"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "id": "u:20abee18b246",
+                                    "size": "sm",
+                                    "level": "primary"
+                                  }
+                                ],
+                                "size": "xs",
+                                "style": {
+                                  "position": "static",
+                                  "display": "block",
+                                  "flex": "0 0 auto"
+                                },
+                                "wrapperBody": false,
+                                "isFixedHeight": false,
+                                "isFixedWidth": false,
+                                "id": "u:f904ad522332"
+                              }
+                            ],
+                            "style": {
+                              "position": "relative",
+                              "inset": "auto",
+                              "flexWrap": "nowrap",
+                              "zIndex": 0
+                            },
+                            "direction": "row",
+                            "justify": "center",
+                            "alignItems": "center",
+                            "isFixedHeight": false,
+                            "isFixedWidth": false,
+                            "id": "u:33246ad5d373"
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": true,
+                        "size": "md",
+                        "actions": [
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:4561faf838b6",
+              "level": "enhance",
+              "hiddenOn": "${material_type!=2}"
+            },
+            {
+              "type": "button",
+              "label": "分享",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "素材分享",
+                        "body": [
+                          {
+                            "type": "flex",
+                            "className": "p-1",
+                            "items": [
+                              {
+                                "type": "container",
+                                "body": [
+                                  {
+                                    "type": "qrcode",
+                                    "value": "${content}",
+                                    "codeSize": 128,
+                                    "id": "u:27cd064a81d5"
+                                  }
+                                ],
+                                "size": "md",
+                                "style": {
+                                  "position": "static",
+                                  "display": "block",
+                                  "flex": "0 0 auto",
+                                  "boxShadow": " 0px 0px 0px 0px transparent"
+                                },
+                                "wrapperBody": false,
+                                "isFixedHeight": false,
+                                "isFixedWidth": false,
+                                "id": "u:1c4115661113"
+                              },
+                              {
+                                "type": "container",
+                                "body": [
+                                  {
+                                    "type": "steps",
+                                    "id": "u:7caf463749ac",
+                                    "value": "0",
+                                    "steps": [
+                                      {
+                                        "title": "",
+                                        "subTitle": "复制链接",
+                                        "description": ""
+                                      },
+                                      {
+                                        "title": "",
+                                        "subTitle": "发送链接至用户"
+                                      }
+                                    ],
+                                    "status": "finish"
+                                  },
+                                  {
+                                    "type": "input-text",
+                                    "label": "",
+                                    "name": "content",
+                                    "mode": "inline",
+                                    "size": "lg",
+                                    "readOnly": true,
+                                    "id": "u:bde7b1dc7b92",
+                                    "value": "${content}"
+                                  },
+                                  {
+                                    "type": "button",
+                                    "label": "复制链接",
+                                    "onEvent": {
+                                      "click": {
+                                        "actions": [
+                                          {
+                                            "args": {
+                                              "copyFormat": "text/plain",
+                                              "content": "${content}"
+                                            },
+                                            "actionType": "copy"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "size": "sm",
+                                    "level": "primary",
+                                    "id": "u:da17d36384d2"
+                                  }
+                                ],
+                                "size": "xs",
+                                "style": {
+                                  "position": "static",
+                                  "display": "block",
+                                  "flex": "0 0 auto"
+                                },
+                                "wrapperBody": false,
+                                "isFixedHeight": false,
+                                "isFixedWidth": false,
+                                "id": "u:5813c6cff156"
+                              }
+                            ],
+                            "style": {
+                              "position": "relative",
+                              "inset": "auto",
+                              "flexWrap": "nowrap",
+                              "zIndex": 0,
+                              "boxShadow": " 0px 0px 0px 0px transparent"
+                            },
+                            "direction": "row",
+                            "justify": "center",
+                            "alignItems": "center",
+                            "isFixedHeight": false,
+                            "isFixedWidth": false,
+                            "id": "u:ea3dc875e889"
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": true,
+                        "size": "md",
+                        "actions": [
+                        ],
+                        "id": "u:a0df27f3629b"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:5f26fe6a7f49",
+              "level": "enhance",
+              "hiddenOn": "${material_type!=3}"
+            },
+            {
+              "type": "button",
+              "label": "分享",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "问卷分享",
+                        "body": [
+                          {
+                            "type": "iframe",
+                            "src": "${env.form_address}/survey/${questionnaire_id}/collect?third_share=1",
+                            "style": {
+                              "boxShadow": " 0px 0px 0px 0px transparent",
+                              "height": "70vh"
+                            },
+                            "id": "u:b45ce90e52a3"
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": false,
+                        "size": "lg",
+                        "actions": [
+                        ],
+                        "id": "u:1e17bc30f2a6"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:9846d4ecdcce",
+              "level": "enhance",
+              "hiddenOn": "${material_type!=4}"
+            },
+            {
+              "type": "button",
+              "label": "编辑",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "编辑",
+                        "body": [
+                          {
+                            "type": "form",
+                            "api": {
+                              "method": "post",
+                              "url": "/api/aio-program/task_plain_text_materials/${task_material_id}",
+                              "messages": {
+                              },
+                              "data": {
+                                "type": "${material_type}",
+                                "title": "${title}",
+                                "content": "${content}"
+                              },
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "dataType": "json"
+                            },
+                            "body": [
+                              {
+                                "label": "标题",
+                                "name": "title",
+                                "type": "input-text",
+                                "id": "u:d7df0611aef4",
+                                "placeholder": "请输入标题",
+                                "required": true
+                              },
+                              {
+                                "label": "内容",
+                                "name": "content",
+                                "placeholder": "请输入内容",
+                                "type": "textarea",
+                                "id": "u:0a6255d68e36",
+                                "minRows": 3,
+                                "maxRows": 20,
+                                "required": true
+                              }
+                            ],
+                            "id": "u:a92bab8a0ad1",
+                            "onEvent": {
+                              "inited": {
+                                "weight": 0,
+                                "actions": [
+                                ]
+                              }
+                            },
+                            "initApi": {
+                              "url": "/api/aio-program/task_plain_text_materials/$task_material_id",
+                              "method": "get",
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "messages": {
+                              },
+                              "replaceData": true
+                            }
+                          }
+                        ],
+                        "showCloseButton": false,
+                        "actions": [
+                          {
+                            "type": "button",
+                            "label": "取消",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "args": {
+                                    },
+                                    "actionType": "closeDialog"
+                                  }
+                                ]
+                              }
+                            },
+                            "close": false,
+                            "confirmText": "退出当前页后，您填写的素材内容将无法保存，是否确认退出？",
+                            "id": "u:c9b5cd630a2c"
+                          },
+                          {
+                            "type": "button",
+                            "label": "确认",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "componentId": "u:a92bab8a0ad1",
+                                    "args": {
+                                    },
+                                    "actionType": "submit"
+                                  },
+                                  {
+                                    "componentId": "u:82fd2c441a0f",
+                                    "args": {
+                                      "resetPage": false
+                                    },
+                                    "actionType": "reload",
+                                    "dataMergeMode": "merge"
+                                  }
+                                ]
+                              }
+                            },
+                            "level": "primary",
+                            "id": "u:439eed9bbf7e"
+                          }
+                        ],
+                        "id": "u:67fe48aa4db2"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:4a0997494be0",
+              "level": "default",
+              "hiddenOn": "${material_type!=1}"
+            },
+            {
+              "type": "button",
+              "label": "编辑",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "id": "u:65d1a532d354",
+                        "type": "dialog",
+                        "title": "编辑",
+                        "body": [
+                          {
+                            "type": "form",
+                            "api": {
+                              "method": "post",
+                              "url": "/api/aio-program/task_rich_text_materials/${task_material_id}",
+                              "messages": {
+                              },
+                              "data": {
+                                "type": "${material_type}",
+                                "title": "${title}",
+                                "description": "${description}",
+                                "thumbnail": "${thumbnail}",
+                                "content": "${content}",
+                                "task_material_id": "${task_material_id}"
+                              },
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "dataType": "json",
+                              "replaceData": true
+                            },
+                            "body": [
+                              {
+                                "label": "标题",
+                                "name": "title",
+                                "id": "u:c05b466cadc3",
+                                "placeholder": "请输入标题",
+                                "type": "input-text",
+                                "required": true
+                              },
+                              {
+                                "label": "描述",
+                                "name": "description",
+                                "id": "u:da2353c12dcf",
+                                "placeholder": "请输入描述",
+                                "type": "input-text"
+                              },
+                              {
+                                "label": "封面",
+                                "name": "thumbnail",
+                                "type": "input-image",
+                                "placeholder": "-",
+                                "accept": ".jpeg, .jpg, .png, .gif",
+                                "uploadType": "fileReceptor",
+                                "proxy": false,
+                                "multiple": false,
+                                "hideUploadButton": false,
+                                "autoUpload": true,
+                                "fixedSize": false,
+                                "receiver": {
+                                  "url": "/api/admin/materialcenter/material/upload",
+                                  "method": "post",
+                                  "messages": {
+                                  }
+                                },
+                                "limit": true,
+                                "crop": {
+                                  "viewMode": 1,
+                                  "rotatable": true,
+                                  "scalable": true,
+                                  "aspectRatio": 1
+                                },
+                                "maxSize": 2000000,
+                                "id": "u:889fe6d93c52"
+                              },
+                              {
+                                "type": "input-rich-text",
+                                "label": "内容",
+                                "name": "content",
+                                "id": "u:ad254a9d5ff2",
+                                "receiver": {
+                                  "url": "/api/admin/materialcenter/material/upload",
+                                  "method": "post"
+                                },
+                                "vendor": "tinymce",
+                                "options": {
+                                  "height": 400,
+                                  "menubar": true,
+                                  "plugins": "advlist,autolink,link,image,lists,charmap,preview,anchor,pagebreak,searchreplace,wordcount,visualblocks,visualchars,code,fullscreen,insertdatetime,media,nonbreaking,table,emoticons,template,help",
+                                  "toolbar": "undo redo formatselect bold italic backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent removeformat help",
+                                  "convert_urls": false
+                                },
+                                "required": true
+                              }
+                            ],
+                            "id": "u:aa311c2d1afb",
+                            "initApi": {
+                              "url": "/api/aio-program/task_rich_text_materials/$task_material_id",
+                              "method": "get",
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "messages": {
+                              }
+                            }
+                          }
+                        ],
+                        "showCloseButton": false,
+                        "closeOnEsc": false,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "size": "md",
+                        "actions": [
+                          {
+                            "type": "button",
+                            "label": "取消",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "args": {
+                                    },
+                                    "actionType": "closeDialog"
+                                  }
+                                ]
+                              }
+                            },
+                            "id": "u:1077676879c8",
+                            "close": false,
+                            "confirmText": "退出当前页后，您填写的素材内容将无法保存，是否确认退出？"
+                          },
+                          {
+                            "type": "button",
+                            "label": "确认",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "componentId": "u:aa311c2d1afb",
+                                    "args": {
+                                    },
+                                    "actionType": "submit"
+                                  },
+                                  {
+                                    "componentId": "u:82fd2c441a0f",
+                                    "args": {
+                                      "resetPage": false
+                                    },
+                                    "actionType": "reload",
+                                    "dataMergeMode": "merge"
+                                  }
+                                ]
+                              }
+                            },
+                            "id": "u:492c8a2bcc37",
+                            "level": "primary"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:878b63a219af",
+              "level": "default",
+              "hiddenOn": "${material_type!=2}"
+            },
+            {
+              "type": "button",
+              "label": "编辑",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "编辑",
+                        "body": [
+                          {
+                            "type": "form",
+                            "api": {
+                              "method": "post",
+                              "url": "/api/aio-program/task_link_materials/${task_material_id}",
+                              "messages": {
+                              },
+                              "data": {
+                                "type": "${material_type}",
+                                "title": "${title}",
+                                "description": "${description}",
+                                "thumbnail": "${thumbnail}",
+                                "content": "${content}"
+                              },
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "dataType": "json"
+                            },
+                            "body": [
+                              {
+                                "label": "标题",
+                                "name": "title",
+                                "type": "input-text",
+                                "required": true,
+                                "placeholder": "请输入标题",
+                                "id": "u:b448ed223784"
+                              },
+                              {
+                                "label": "描述",
+                                "name": "description",
+                                "type": "input-text",
+                                "placeholder": "请输入描述",
+                                "id": "u:dcd14753352f"
+                              },
+                              {
+                                "label": "封面",
+                                "name": "thumbnail",
+                                "type": "input-image",
+                                "autoUpload": true,
+                                "proxy": true,
+                                "uploadType": "fileReceptor",
+                                "imageClassName": "r w-full",
+                                "accept": ".jpeg, .jpg, .png, .gif",
+                                "multiple": false,
+                                "hideUploadButton": false,
+                                "fixedSize": false,
+                                "receiver": {
+                                  "url": "/api/admin/materialcenter/material/upload",
+                                  "method": "post"
+                                },
+                                "limit": true,
+                                "crop": {
+                                  "viewMode": 1,
+                                  "rotatable": true,
+                                  "scalable": true,
+                                  "aspectRatio": 1
+                                },
+                                "maxSize": 2000000,
+                                "id": "u:26eb3c57762b"
+                              },
+                              {
+                                "label": "链接",
+                                "name": "content",
+                                "type": "input-url",
+                                "id": "u:87bd4974212b",
+                                "required": true,
+                                "placeholder": "请输入链接"
+                              }
+                            ],
+                            "id": "u:a6b866a7d803",
+                            "initApi": {
+                              "url": "/api/aio-program/task_link_materials/$task_material_id",
+                              "method": "get",
+                              "requestAdaptor": "",
+                              "adaptor": "",
+                              "messages": {
+                              },
+                              "replaceData": true
+                            }
+                          }
+                        ],
+                        "showCloseButton": false,
+                        "actions": [
+                          {
+                            "type": "button",
+                            "label": "取消",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "args": {
+                                    },
+                                    "actionType": "closeDialog"
+                                  }
+                                ]
+                              }
+                            },
+                            "confirmText": "退出当前页后，您填写的素材内容将无法保存，是否确认退出？",
+                            "close": false,
+                            "id": "u:c4a6b49e1753"
+                          },
+                          {
+                            "type": "button",
+                            "label": "确认",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "componentId": "u:a6b866a7d803",
+                                    "actionType": "submit"
+                                  },
+                                  {
+                                    "componentId": "u:82fd2c441a0f",
+                                    "args": {
+                                      "resetPage": false
+                                    },
+                                    "actionType": "reload",
+                                    "dataMergeMode": "merge"
+                                  }
+                                ]
+                              }
+                            },
+                            "level": "primary",
+                            "id": "u:4a31c14e98a3"
+                          }
+                        ],
+                        "id": "u:df7434bb580d"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:f44386e7d69f",
+              "level": "default",
+              "hiddenOn": "${material_type!=3}"
+            },
+            {
+              "type": "button",
+              "label": "编辑",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "问卷编辑",
+                        "body": [
+                          {
+                            "type": "iframe",
+                            "src": "${env.form_address}/survey/${questionnaire_id}/create?third_edit=1",
+                            "id": "u:454a06072450",
+                            "style": {
+                              "boxShadow": " 0px 0px 0px 0px transparent",
+                              "height": "70vh"
+                            }
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": false,
+                        "size": "lg",
+                        "actions": [
+                        ],
+                        "id": "u:002c3d0fa5bf",
+                        "onEvent": {
+                          "cancel": {
+                            "weight": 0,
+                            "actions": [
+                              {
+                                "componentId": "u:82fd2c441a0f",
+                                "args": {
+                                  "resetPage": false
+                                },
+                                "actionType": "reload",
+                                "dataMergeMode": "merge"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:929c54600106",
+              "level": "default",
+              "hiddenOn": "${material_type!=4}"
+            },
+            {
+              "type": "button",
+              "label": "查看数据",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "查看数据",
+                        "body": [
+                          {
+                            "type": "iframe",
+                            "src": "${env.form_address}/survey/${questionnaire_id}/results?third_results=1",
+                            "style": {
+                              "boxShadow": " 0px 0px 0px 0px transparent",
+                              "height": "70vh"
+                            },
+                            "id": "u:37086636428b"
+                          }
+                        ],
+                        "showCloseButton": true,
+                        "showErrorMsg": true,
+                        "showLoading": true,
+                        "closeOnEsc": false,
+                        "size": "lg",
+                        "actions": [
+                        ],
+                        "id": "u:5a188d5eac2f"
+                      }
+                    }
+                  ]
+                }
+              },
+              "id": "u:5082a474f066",
+              "level": "default",
+              "hiddenOn": "${material_type!=4}"
             }
           ]
-        },
-        "perPage": 20,
-        "perPageField": "page_size",
-        "footerToolbar": [
+        }
+      ],
+      "bulkActions": [
+      ],
+      "itemActions": [
+      ],
+      "features": [
+        "filter",
+        "update"
+      ],
+      "filterColumnCount": 3,
+      "perPageAvailable": [
+        10,
+        20,
+        50
+      ],
+      "messages": {
+      },
+      "filter": {
+        "title": "",
+        "body": [
           {
-            "type": "statistics",
-            "align": "left"
+            "type": "input-text",
+            "name": "title_1",
+            "label": "标题",
+            "id": "u:f2bcf12b0bdf",
+            "mode": "inline",
+            "size": "md",
+            "placeholder": "请输入关键词"
           },
           {
-            "type": "pagination",
-            "align": "right"
+            "type": "input-text",
+            "name": "description_1",
+            "label": "素材内容",
+            "id": "u:04caed83d901",
+            "mode": "inline",
+            "size": "md",
+            "placeholder": "请输入关键词"
           },
           {
-            "type": "switch-per-page",
-            "tpl": "内容",
-            "wrapperComponent": "",
-            "id": "u:9138cd5259bc",
-            "align": "right"
+            "type": "input-text",
+            "name": "task_name_1",
+            "label": "任务名称",
+            "id": "u:e7568ed3b0f1",
+            "mode": "inline",
+            "size": "md",
+            "placeholder": "请输入关键词"
+          },
+          {
+            "type": "nested-select",
+            "name": "executor_ids",
+            "label": "执行者",
+            "id": "u:cf62f9bffada",
+            "size": "lg",
+            "placeholder": "请选择执行者",
+            "clearable": true,
+            "searchable": true,
+            "multiple": true,
+            "onlyChildren": true,
+            "onlyLeaf": true,
+            "source": {
+              "method": "get",
+              "messages": {
+              },
+              "adaptor": "",
+              "dataType": "json",
+              "url": "/api/admin/upms/sysUser/getFollowerList"
+            },
+            "labelField": "label",
+            "valueField": "value",
+            "hideNodePathLabel": true,
+            "joinValues": false,
+            "extractValue": true,
+            "checkAll": false
+          },
+          {
+            "type": "nested-select",
+            "name": "patient_ids",
+            "label": "用户",
+            "id": "u:cf62f9bffada",
+            "size": "lg",
+            "placeholder": "请选择目标患者",
+            "onlyChildren": true,
+            "searchable": true,
+            "onlyLeaf": true,
+            "multiple": true,
+            "source": {
+              "url": "/api/admin/patientcenter/patient/list",
+              "method": "post",
+              "messages": {
+              },
+              "adaptor": "console.log(payload)\nreturn payload",
+              "dataType": "json",
+              "data": {
+                "patientDtoFilter": {
+                  "patientName": "",
+                  "nationalId": "",
+                  "phone": "",
+                  "patientId": "",
+                  "dataPermissionsUser": ""
+                },
+                "pageParam": {
+                  "pageNum": "1",
+                  "pageSize": "1000"
+                }
+              }
+            },
+            "labelField": "patientName",
+            "valueField": "patientId",
+            "clearable": true,
+            "hideNodePathLabel": true,
+            "joinValues": false,
+            "extractValue": true
+          },
+          {
+            "type": "button-group-select",
+            "name": "material_type",
+            "label": "类型",
+            "inline": false,
+            "options": [
+              {
+                "label": "富文本",
+                "value": 2
+              },
+              {
+                "label": "纯文本",
+                "value": 1
+              },
+              {
+                "label": "链接",
+                "value": 3
+              },
+              {
+                "label": "问卷",
+                "value": 4
+              }
+            ],
+            "id": "u:46bedb90b7e6",
+            "multiple": false,
+            "value": 2,
+            "onEvent": {
+              "change": {
+                "weight": 0,
+                "actions": [
+                ]
+              }
+            }
           }
         ],
-        "alwaysShowPagination": true
-      }
-    ],
-    "id": "u:fced18697ed4",
-    "pullRefresh": {
-      "disabled": true
-    },
-    "asideResizor": false,
-    "style": {
-      "boxShadow": " 0px 0px 0px 0px transparent"
-    },
-    "regions": [
-      "body"
-    ]
-  }
+        "id": "u:0544ba7d1ee8",
+        "actions": [
+          {
+            "type": "button",
+            "label": "查询",
+            "onEvent": {
+              "click": {
+                "actions": [
+                  {
+                    "componentId": "u:0544ba7d1ee8",
+                    "args": {
+                    },
+                    "actionType": "submit"
+                  }
+                ]
+              }
+            },
+            "id": "u:37ec07e5a8d6",
+            "level": "primary"
+          },
+          {
+            "type": "button",
+            "label": "重置",
+            "onEvent": {
+              "click": {
+                "actions": [
+                  {
+                    "componentId": "u:0544ba7d1ee8",
+                    "args": {
+                    },
+                    "actionType": "reset"
+                  }
+                ]
+              }
+            },
+            "id": "u:41ed8f2263eb"
+          }
+        ],
+        "submitOnChange": true,
+        "canAccessSuperData": false
+      },
+      "perPage": 20,
+      "perPageField": "page_size",
+      "footerToolbar": [
+        {
+          "type": "statistics",
+          "align": "left"
+        },
+        {
+          "type": "pagination",
+          "align": "right"
+        },
+        {
+          "type": "switch-per-page",
+          "tpl": "内容",
+          "wrapperComponent": "",
+          "id": "u:9138cd5259bc",
+          "align": "right"
+        }
+      ],
+      "alwaysShowPagination": true
+    }
+  ],
+  "id": "u:fced18697ed4",
+  "pullRefresh": {
+    "disabled": true
+  },
+  "asideResizor": false,
+  "style": {
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "regions": [
+    "body"
+  ]
+}
