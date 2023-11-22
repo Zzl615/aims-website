@@ -1,0 +1,625 @@
+{
+    "type": "page",
+    "body": [
+      {
+        "type": "tpl",
+        "tpl": "请编辑内容",
+        "inline": true,
+        "id": "u:6e1b7698fc93"
+      },
+      {
+        "type": "crud",
+        "syncLocation": false,
+        "api": {
+          "method": "get",
+          "url": "/api/document_server/v1/document/list",
+          "requestAdaptor": "",
+          "adaptor": "",
+          "messages": {},
+          "headers": {
+            "x-user-id": "doctorgpt"
+          },
+          "data": {
+            "page": "$page",
+            "page_size": "$page_size",
+            "group_ids": "$group_ids"
+          }
+        },
+        "columns": [
+          {
+            "label": "ID",
+            "type": "text",
+            "name": "resource_id",
+            "id": "u:d1a85a0dfc47"
+          },
+          {
+            "label": "医生ID",
+            "type": "text",
+            "name": "group_id",
+            "id": "u:efc9cc08b844"
+          },
+          {
+            "label": "文章名称",
+            "type": "text",
+            "name": "title",
+            "id": "u:efc9cc08b844"
+          },
+          {
+            "type": "text",
+            "label": "内容概述",
+            "id": "u:441c9a1e97b6",
+            "name": "overview"
+          },
+          {
+            "type": "operation",
+            "label": "操作",
+            "buttons": [
+              {
+                "type": "button",
+                "label": "删除",
+                "actionType": "ajax",
+                "level": "link",
+                "className": "text-danger",
+                "confirmText": "确定要删除？",
+                "api": {
+                  "method": "post",
+                  "url": "/api/document_server/v1/document/delete?resource_id=${resource_id}",
+                  "requestAdaptor": "",
+                  "adaptor": "",
+                  "messages": {},
+                  "headers": {
+                    "x-user-id": "doctorgpt"
+                  }
+                },
+                "id": "u:1e50cbbc18a5"
+              },
+              {
+                "label": "详情",
+                "type": "button",
+                "actionType": "dialog",
+                "level": "link",
+                "dialog": {
+                  "type": "dialog",
+                  "title": "文章详情",
+                  "body": [
+                    {
+                      "type": "form",
+                      "body": [
+                        {
+                          "label": "ID",
+                          "name": "resource_id",
+                          "id": "u:d1a85a0dfc47",
+                          "type": "input-text",
+                          "readOnly": true
+                        },
+                        {
+                          "label": "文章名称",
+                          "name": "title",
+                          "id": "u:efc9cc08b844",
+                          "type": "input-text"
+                        },
+                        {
+                          "name": "knowledge_paragraphs",
+                          "id": "u:c8162959f169",
+                          "type": "each",
+                          "items": [
+                            {
+                              "type": "card",
+                              "header": {
+                                "title": "段落",
+                                "subTitle": ""
+                              },
+                              "body": [
+                                {
+                                  "name": "question",
+                                  "label": "标题",
+                                  "id": "u:c5941a4b6508"
+                                },
+                                {
+                                  "name": "answer",
+                                  "label": "内容",
+                                  "id": "u:6c3a8fd40d9d"
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": "button",
+                                  "label": "编辑",
+                                  "id": "u:ae98a0034c8d",
+                                  "icon": "fa fa-stack-overflow",
+                                  "onEvent": {
+                                    "click": {
+                                      "actions": [
+                                        {
+                                          "actionType": "dialog",
+                                          "dialog": {
+                                            "type": "dialog",
+                                            "title": "段落编辑",
+                                            "body": [
+                                              {
+                                                "type": "form",
+                                                "title": "表单",
+                                                "body": [
+                                                  {
+                                                    "label": "分组编号",
+                                                    "type": "input-text",
+                                                    "name": "group_id",
+                                                    "id": "u:65da5f8a09b7",
+                                                    "disabled": true,
+                                                    "readOnly": true
+                                                  },
+                                                  {
+                                                    "label": "文章编号",
+                                                    "name": "resource_id",
+                                                    "type": "input-text",
+                                                    "id": "u:b58c429cbd56",
+                                                    "disabled": true,
+                                                    "readOnly": true
+                                                  },
+                                                  {
+                                                    "label": "段落编号",
+                                                    "name": "data_id",
+                                                    "type": "input-text",
+                                                    "id": "u:d12caf6f271b",
+                                                    "disabled": true,
+                                                    "readOnly": true
+                                                  },
+                                                  {
+                                                    "type": "input-text",
+                                                    "label": "小标题",
+                                                    "name": "question",
+                                                    "id": "u:babecc791147"
+                                                  },
+                                                  {
+                                                    "label": "段落",
+                                                    "type": "textarea",
+                                                    "name": "answer",
+                                                    "id": "u:bbf76740e94f"
+                                                  }
+                                                ],
+                                                "api": {
+                                                  "url": "/api/document_server/v1/paragraph/edit",
+                                                  "method": "post",
+                                                  "requestAdaptor": "",
+                                                  "adaptor": "",
+                                                  "messages": {},
+                                                  "dataType": "json",
+                                                  "headers": {
+                                                    "x-user-id": "doctorgpt"
+                                                  },
+                                                  "data": {
+                                                    "data_id": "${data_id}",
+                                                    "group_id": "${group_id}",
+                                                    "resource_id": "${resource_id}",
+                                                    "question": "${question}",
+                                                    "answer": "${answer}"
+                                                  }
+                                                },
+                                                "id": "u:5308f057c127",
+                                                "onEvent": {
+                                                  "submitSucc": {
+                                                    "weight": 0,
+                                                    "actions": [
+                                                      {
+                                                        "componentId": "u:cb6e2473eb44",
+                                                        "actionType": "reload",
+                                                        "dataMergeMode": "merge"
+                                                      },
+                                                      {
+                                                        "componentId": "u:d54fb09f5c31",
+                                                        "actionType": "reload",
+                                                        "args": {
+                                                          "resetPage": true
+                                                        },
+                                                        "dataMergeMode": "merge"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "showCloseButton": true,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "className": "app-popover",
+                                            "id": "u:de698cf66514",
+                                            "closeOnEsc": false,
+                                            "onEvent": {
+                                              "confirm": {
+                                                "weight": 0,
+                                                "actions": [
+                                                  {
+                                                    "componentId": "u:cb6e2473eb44",
+                                                    "actionType": "reload",
+                                                    "dataMergeMode": "merge"
+                                                  },
+                                                  {
+                                                    "componentId": "u:d54fb09f5c31",
+                                                    "actionType": "reload",
+                                                    "args": {
+                                                      "resetPage": true
+                                                    },
+                                                    "dataMergeMode": "merge"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "button",
+                                  "label": "删除",
+                                  "id": "u:34bbc0048fcb",
+                                  "onEvent": {
+                                    "click": {
+                                      "weight": 0,
+                                      "actions": [
+                                        {
+                                          "actionType": "dialog",
+                                          "dialog": {
+                                            "type": "dialog",
+                                            "title": "弹框标题",
+                                            "body": [
+                                              {
+                                                "type": "tpl",
+                                                "tpl": "确定要删除该段落？",
+                                                "wrapperComponent": "",
+                                                "inline": false,
+                                                "id": "u:a64d3f810451"
+                                              },
+                                              {
+                                                "type": "form",
+                                                "title": "表单",
+                                                "body": [
+                                                  {
+                                                    "label": "resource_id",
+                                                    "type": "input-text",
+                                                    "name": "resource_id",
+                                                    "id": "u:f44b61c552cb",
+                                                    "hidden": true
+                                                  },
+                                                  {
+                                                    "name": "data_id",
+                                                    "label": "data_id",
+                                                    "type": "input-text",
+                                                    "id": "u:988aecd85a73",
+                                                    "hidden": true
+                                                  }
+                                                ],
+                                                "api": {
+                                                  "url": "/api/document_server/v1/paragraph/delete",
+                                                  "method": "post",
+                                                  "requestAdaptor": "",
+                                                  "adaptor": "",
+                                                  "messages": {},
+                                                  "dataType": "json",
+                                                  "headers": {
+                                                    "x-user-id": "doctorgpt"
+                                                  }
+                                                },
+                                                "id": "u:82656eb53229",
+                                                "onEvent": {
+                                                  "submitSucc": {
+                                                    "weight": 0,
+                                                    "actions": [
+                                                      {
+                                                        "componentId": "u:cb6e2473eb44",
+                                                        "actionType": "reload",
+                                                        "dataMergeMode": "merge"
+                                                      },
+                                                      {
+                                                        "componentId": "u:d54fb09f5c31",
+                                                        "actionType": "reload",
+                                                        "args": {
+                                                          "resetPage": true
+                                                        },
+                                                        "dataMergeMode": "merge"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "showCloseButton": true,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "className": "app-popover",
+                                            "id": "u:84f75bc97be5",
+                                            "closeOnEsc": false,
+                                            "onEvent": {
+                                              "confirm": {
+                                                "weight": 0,
+                                                "actions": []
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
+                              "id": "u:4ee7f16f0e6e",
+                              "data": {
+                                "data_id": "$data_id",
+                                "title": "$title",
+                                "content": "$content"
+                              }
+                            }
+                          ],
+                          "placeholder": "暂无内容"
+                        }
+                      ],
+                      "id": "u:cb6e2473eb44",
+                      "initApi": {
+                        "url": "/api/document_server/v1/document/detail?resource_id=${resource_id}",
+                        "method": "get",
+                        "headers": {
+                          "x-user-id": "doctorgpt"
+                        }
+                      }
+                    }
+                  ],
+                  "id": "u:1374324739b3",
+                  "actions": [
+                    {
+                      "type": "button",
+                      "label": "关闭",
+                      "onEvent": {
+                        "click": {
+                          "actions": [
+                            {
+                              "actionType": "closeDialog"
+                            }
+                          ]
+                        }
+                      },
+                      "id": "u:7d9d1266cc87"
+                    },
+                    {
+                      "type": "button",
+                      "label": "创建段落",
+                      "onEvent": {
+                        "click": {
+                          "actions": [
+                            {
+                              "actionType": "dialog",
+                              "dialog": {
+                                "type": "dialog",
+                                "title": "弹框标题",
+                                "body": [
+                                  {
+                                    "type": "form",
+                                    "title": "表单",
+                                    "body": [
+                                      {
+                                        "label": "分组编号",
+                                        "type": "input-text",
+                                        "name": "group_id",
+                                        "id": "u:70dda886af34",
+                                        "readOnly": true,
+                                        "disabled": true
+                                      },
+                                      {
+                                        "type": "input-text",
+                                        "label": "文章编号",
+                                        "name": "resource_id",
+                                        "id": "u:dde6df5a8eed",
+                                        "readOnly": true,
+                                        "disabled": true
+                                      },
+                                      {
+                                        "type": "input-text",
+                                        "label": "小标题",
+                                        "name": "question",
+                                        "id": "u:897a42511695"
+                                      },
+                                      {
+                                        "type": "textarea",
+                                        "label": "段落",
+                                        "name": "answer",
+                                        "id": "u:e7c3c444ac2b"
+                                      }
+                                    ],
+                                    "api": {
+                                      "url": "/api/document_server/v1/paragraph/create",
+                                      "method": "post",
+                                      "requestAdaptor": "",
+                                      "adaptor": "",
+                                      "messages": {},
+                                      "dataType": "json",
+                                      "headers": {
+                                        "x-user-id": "doctorgpt"
+                                      },
+                                      "data": {
+                                        "group_id": "${group_id}",
+                                        "resource_id": "${resource_id}",
+                                        "question": "${question}",
+                                        "answer": "${answer}"
+                                      }
+                                    },
+                                    "id": "u:e9bf58317216"
+                                  }
+                                ],
+                                "showCloseButton": true,
+                                "showErrorMsg": true,
+                                "showLoading": true,
+                                "className": "app-popover",
+                                "id": "u:a0fd3798aa34",
+                                "closeOnEsc": false,
+                                "onEvent": {
+                                  "confirm": {
+                                    "weight": 0,
+                                    "actions": [
+                                      {
+                                        "componentId": "u:d54fb09f5c31",
+                                        "actionType": "reload",
+                                        "args": {
+                                          "resetPage": true
+                                        },
+                                        "dataMergeMode": "merge"
+                                      },
+                                      {
+                                        "componentId": "u:cb6e2473eb44",
+                                        "actionType": "reload",
+                                        "dataMergeMode": "merge"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "id": "u:4237b69e987f",
+                      "level": "primary"
+                    }
+                  ],
+                  "showCloseButton": true,
+                  "closeOnEsc": false,
+                  "showErrorMsg": true,
+                  "showLoading": true
+                },
+                "id": "u:37eb4cc49796"
+              }
+            ],
+            "id": "u:2255945b61e0"
+          }
+        ],
+        "bulkActions": [],
+        "itemActions": [],
+        "filterSettingSource": [
+          "title",
+          "resource_id",
+          "group_id",
+          "overview"
+        ],
+        "features": [
+          "filter",
+          "delete",
+          "update",
+          "create"
+        ],
+        "filterColumnCount": 3,
+        "filterEnabledList": [
+          {
+            "label": "group_id",
+            "value": "group_id"
+          }
+        ],
+        "filter": {
+          "title": "查询条件",
+          "columnCount": 3,
+          "mode": "horizontal",
+          "body": [
+            {
+              "type": "select",
+              "label": "科室名称",
+              "name": "group_ids",
+              "id": "u:c7c63f4896f9",
+              "multiple": false,
+              "options": [
+                {
+                  "label": "心血管内科",
+                  "value": "xinxueguanneike"
+                }
+              ],
+              "value": "xinxueguanneike"
+            }
+          ],
+          "id": "u:9f679f91ef43"
+        },
+        "id": "u:d54fb09f5c31",
+        "perPageAvailable": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "perPageField": "page_size",
+        "pageField": "page",
+        "perPage": 10,
+        "page": 1,
+        "headerToolbar": [
+          {
+            "label": "新增",
+            "type": "button",
+            "actionType": "dialog",
+            "level": "primary",
+            "dialog": {
+              "title": "新增文章",
+              "body": [
+                {
+                  "type": "form",
+                  "api": {
+                    "method": "post",
+                    "url": "/api/document_server/v1/document/upload",
+                    "requestAdaptor": "",
+                    "adaptor": "",
+                    "messages": {},
+                    "headers": {
+                      "x-user-id": "doctorgpt"
+                    },
+                    "dataType": "form-data",
+                    "data": {
+                      "files": "${files}",
+                      "group_id": "${group_id}"
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "select",
+                      "name": "group_ids",
+                      "label": "科室名称",
+                      "id": "u:c7c63f4896f9",
+                      "options": [
+                        {
+                          "label": "心血管内科",
+                          "value": "xinxueguanneike"
+                        }
+                      ],
+                      "multiple": false,
+                      "value": "xinxueguanneike"
+                    },
+                    {
+                      "type": "input-file",
+                      "label": "文件上传",
+                      "autoUpload": true,
+                      "proxy": true,
+                      "uploadType": "asForm",
+                      "name": "files",
+                      "id": "u:f5cd3f03c5e8",
+                      "btnLabel": "文件上传",
+                      "multiple": false,
+                      "useChunk": false,
+                      "accept": "",
+                      "drag": false,
+                      "asBlob": true,
+                      "formType": "asBlob",
+                      "asBase64": false,
+                      "bos": "default"
+                    }
+                  ],
+                  "id": "u:3822e07440c1"
+                }
+              ],
+              "type": "dialog",
+              "id": "u:3a87ff8c58df",
+              "showCloseButton": true,
+              "closeOnEsc": false,
+              "showErrorMsg": true,
+              "showLoading": true
+            },
+            "id": "u:4ae1c2712920"
+          },
+          "bulkActions"
+        ]
+      }
+    ],
+    "id": "u:18aa130e6c2e"
+  }
